@@ -1,5 +1,9 @@
 package christmas.Model;
 
+import christmas.View.ErrorMessages;
+import java.util.HashSet;
+import java.util.Set;
+
 public enum Menu {
     PINE_MUSHROOM_SOUP("양송이수프", 6_000, "appetizer"),
     TAPAS("타파스", 5_500, "appetizer"),
@@ -17,11 +21,72 @@ public enum Menu {
     private String menuName;
     private int menuPrice;
     private String menuType;
-    Menu(String menuName, int menuPrice, String menuType)
-    {
+    private static final int MIN_MENU_QUANTITY = 1;
+
+    Menu(String menuName, int menuPrice, String menuType) {
         this.menuName = menuName;
         this.menuPrice = menuPrice;
         this.menuType = menuType;
     }
 
+    public static void parseMenuInput(String menuInput) {
+        String[] menuOrders = menuInput.split(",");
+        for (String menuOrder : menuOrders) {
+            validateFormMenu(menuOrder);
+            String[] menuNameAndQuantity = menuOrder.trim().split("-");
+            if (menuNameAndQuantity.length == 2) {
+                String menuName = menuNameAndQuantity[0];
+                String quantityStr = menuNameAndQuantity[1];
+                validateIsRightMenu(menuName);
+                validateDuplicatedMenu(menuName);
+                int quantity = validateIsNumeric(quantityStr);
+                validateNumberInRange(quantity);
+            }
+        }
+    }
+
+    private static void validateIsRightMenu(String menuName) {
+        for (Menu menu : values()) {
+            if (menu.menuName.equals(menuName)) {
+                ErrorMessages.menuInputError();
+                throw new IllegalArgumentException();
+            }
+        }
+    }
+
+    private static void validateFormMenu(String menuName) {
+        if (!menuName.matches("[가-힣]+-\\d+")) {
+            ErrorMessages.menuInputError();
+            throw new IllegalArgumentException();
+        }
+    }
+
+    private static void validateDuplicatedMenu(String menuName) {
+        Set<String> existingMenu = new HashSet<>();
+
+        for (Menu menu : Menu.values()) {
+            if (existingMenu.contains(menu.menuName)) {
+                ErrorMessages.menuInputError();
+                throw new IllegalArgumentException();
+            } else {
+                existingMenu.add(menu.menuName);
+            }
+        }
+    }
+
+    private static int validateIsNumeric(String quantityStr) {
+        try {
+            return Integer.parseInt(quantityStr);
+        } catch (NumberFormatException e) {
+            ErrorMessages.menuInputError();
+            throw new IllegalArgumentException();
+        }
+    }
+
+    private static void validateNumberInRange(int quantity) {
+        if (quantity < MIN_MENU_QUANTITY) {
+            ErrorMessages.menuInputError();
+            throw new IllegalArgumentException();
+        }
+    }
 }

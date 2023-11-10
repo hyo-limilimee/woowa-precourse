@@ -29,7 +29,10 @@ public enum Menu {
         this.menuType = menuType;
     }
 
+    private static Set<String> existingMenus = new HashSet<>();  // Add this line
+
     public static void parseMenuInput(String menuInput) {
+        existingMenus.clear();  // Clear the existingMenus set before parsing new input
         String[] menuOrders = menuInput.split(",");
         for (String menuOrder : menuOrders) {
             validateFormMenu(menuOrder);
@@ -38,7 +41,7 @@ public enum Menu {
                 String menuName = menuNameAndQuantity[0];
                 String quantityStr = menuNameAndQuantity[1];
                 validateIsRightMenu(menuName);
-                validateDuplicatedMenu(menuName);
+                validateDuplicatedMenu(menuName, existingMenus);  // Pass the existingMenus set
                 int quantity = validateIsNumeric(quantityStr);
                 validateNumberInRange(quantity);
             }
@@ -61,16 +64,12 @@ public enum Menu {
         }
     }
 
-    private static void validateDuplicatedMenu(String menuName) {
-        Set<String> existingMenu = new HashSet<>();
-
-        for (Menu menu : Menu.values()) {
-            if (existingMenu.contains(menu.menuName)) {
-                ErrorMessages.menuInputError();
-                throw new IllegalArgumentException();
-            } else {
-                existingMenu.add(menu.menuName);
-            }
+    private static void validateDuplicatedMenu(String menuName, Set<String> existingMenu) {
+        if (existingMenu.contains(menuName)) {
+            ErrorMessages.menuInputError();
+            throw new IllegalArgumentException();
+        } else {
+            existingMenu.add(menuName);
         }
     }
 

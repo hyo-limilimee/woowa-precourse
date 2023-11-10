@@ -13,6 +13,10 @@ public class VisitingDate {
         this.date = dateInputNum;
     }
 
+    public int getVisitingDate(){
+        return date;
+    }
+
     private static int validateIsNumeric(String dateInput) throws IllegalArgumentException {
         try {
             return Integer.parseInt(dateInput);

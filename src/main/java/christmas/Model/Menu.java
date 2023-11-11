@@ -1,7 +1,11 @@
 package christmas.Model;
 
 import christmas.View.ErrorMessages;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 public enum Menu {
@@ -29,10 +33,10 @@ public enum Menu {
         this.menuType = menuType;
     }
 
-    private static Set<String> existingMenus = new HashSet<>();  // Add this line
+    private static Set<String> existingMenus = new HashSet<>();
 
-    public static void parseMenuInput(String menuInput) {
-        existingMenus.clear();  // Clear the existingMenus set before parsing new input
+    public static Map<String, Integer> parseMenuInput(String menuInput) {
+        Map<String, Integer> orderInfo = new HashMap<>();
         String[] menuOrders = menuInput.split(",");
         for (String menuOrder : menuOrders) {
             validateFormMenu(menuOrder);
@@ -44,8 +48,20 @@ public enum Menu {
                 validateDuplicatedMenu(menuName, existingMenus);  // Pass the existingMenus set
                 int quantity = validateIsNumeric(quantityStr);
                 validateNumberInRange(quantity);
+                orderInfo.put(menuName, quantity);
             }
         }
+        return orderInfo;
+    }
+
+    public static List<Map<String, Integer>> makeOrderInfoList(String[] menuInputs) {
+        List<Map<String, Integer>> orderInfoList = new ArrayList<>();
+
+        for (String menuInput : menuInputs) {
+            Map<String, Integer> orderInfo = parseMenuInput(menuInput);
+            orderInfoList.add(orderInfo);
+        }
+        return orderInfoList;
     }
 
     private static void validateIsRightMenu(String menuName) {

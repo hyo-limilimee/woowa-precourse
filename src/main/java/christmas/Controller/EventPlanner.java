@@ -1,22 +1,26 @@
 package christmas.Controller;
 
-import christmas.Model.Menu;
 import christmas.Model.VisitingDate;
 import christmas.View.InputView;
 import christmas.View.OutputView;
+import java.util.List;
+import java.util.Map;
 
 public class EventPlanner {
 
+    private VisitingDate visitingDate;
+    private List<Map<String, Integer>> orderInfoList;
+
     public EventPlanner() {
     }
-
-    private VisitingDate visitingDate;
-    private Menu menu;
 
     public void run() {
         OutputView.printIntroMessage();
         inputVisitingDate();
         inputMenu();
+        OutputView.printOrderListInfo(orderInfoList);
+
+
     }
 
     public int inputVisitingDate() {
@@ -28,12 +32,8 @@ public class EventPlanner {
         }
     }
 
-    public Menu inputMenu() {
-        try {
-            menu = new Menu(InputView.readDate();
-            return menu;
-        } catch (IllegalArgumentException e) {
-            return inputMenu();
+    public void inputMenu() {
+        {
         }
     }
 }

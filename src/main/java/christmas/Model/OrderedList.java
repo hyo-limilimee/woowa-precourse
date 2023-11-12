@@ -43,6 +43,15 @@ public class OrderedList {
         return orderList;
     }
 
+    public Menu getMenu() {
+        for (Menu menu : Menu.values()) {
+            if (menu.menuName.equals(menuName)) {
+                return menu;
+            }
+        }
+        throw new IllegalStateException();
+    }
+
     public static int calculateTotalPrice(List<OrderedList> orderList) {
         int totalPrice = 0;
 

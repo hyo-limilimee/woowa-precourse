@@ -1,8 +1,6 @@
 package christmas.View;
 
-import christmas.Model.Benefit;
 import christmas.Model.OrderedList;
-import christmas.Model.VisitingDate;
 import java.text.NumberFormat;
 import java.util.List;
 import java.util.Locale;
@@ -75,18 +73,17 @@ public class OutputView {
 
     public static void printChristmasDdayDiscount(int discountAmount) {
         if (discountAmount > MIN_DISCOUNT_AMOUNT) {
-            System.out.println(D_DAY_BENEFIT_MESSAGE +MINUS_MESSAGE + discountAmount + WON_MESSAGE);
+            System.out.println(D_DAY_BENEFIT_MESSAGE + MINUS_MESSAGE + discountAmount + WON_MESSAGE);
         }
     }
 
-    public static void printWeekdayWeekendDiscount(List<OrderedList> orderList, int visitingDay) {
-        int discount = Benefit.weekDaysWeekendsDiscount(orderList, visitingDay);
-
-        if (VisitingDate.isWeekend(visitingDay)) {
-            System.out.println(WEEKEND_DISCOUNT_MESSAGE + MINUS_MESSAGE + discount + WON_MESSAGE);
+    public static void printWeekdayWeekendDiscount(int discountAmount) {
+        if (discountAmount > MIN_DISCOUNT_AMOUNT) {
+            System.out.println(WEEKDAY_DISCOUNT_MESSAGE + ":" + MINUS_MESSAGE + discountAmount + WON_MESSAGE);
+            System.out.println();
             return;
         }
-        System.out.println(WEEKDAY_DISCOUNT_MESSAGE + MINUS_MESSAGE + discount + WON_MESSAGE);
+        System.out.println(WEEKEND_DISCOUNT_MESSAGE + ":" + MINUS_MESSAGE + discountAmount + WON_MESSAGE);
+        System.out.println();
     }
 }
-

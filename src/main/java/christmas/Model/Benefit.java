@@ -1,6 +1,5 @@
 package christmas.Model;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Benefit {
@@ -19,41 +18,32 @@ public class Benefit {
         return 0;
     }
 
-    public static int weekDaysWeekendsDiscount(List<OrderedList> orderList, int visitingDay) {
-        List<Menu> menuList = new ArrayList<>();
-        int mainMenuCount = countMenuType(orderList, menuList, "main");
-        int dessertMenuCount = countMenuType(orderList, menuList, "dessert");
+    public static int weekDaysWeekendsDiscount(List<OrderedList> orderList, int visitingDate) {
+        int itemCount = 0;
 
-        int discount = 0;
-        if (VisitingDate.isWeekend(visitingDay)) {
-            discount = mainMenuCount * WEEKDAYS_WEEKENDS_DISCOUNT_AMOUNT;
-        } else {
-            discount = dessertMenuCount * WEEKDAYS_WEEKENDS_DISCOUNT_AMOUNT;
-        }
-
-        return discount;
-    }
-
-    private static int countMenuType(List<OrderedList> orderList, List<Menu> menuList, String menuType) {
-        int count = 0;
         for (OrderedList orderedItem : orderList) {
-            Menu menu = findMenuByName(menuList, orderedItem.menuName);
-            if (menu != null) {
-                System.out.println("Debug: Menu Type - " + menu.menuType);
-                if (menu.menuType.equals(menuType)) {
-                    count += orderedItem.menuQuantity;
-                }
+            Menu menu = orderedItem.getMenu();
+
+            if (VisitingDate.isWeekend(visitingDate)) {
+                itemCount = countItems(menu, itemCount, "main");
+            } else {
+                itemCount = countItems(menu, itemCount, "dessert");
             }
         }
-        return count;
+
+        int discountAmount = calculateDiscount(itemCount, WEEKDAYS_WEEKENDS_DISCOUNT_AMOUNT);
+
+        return discountAmount;
     }
 
-    private static Menu findMenuByName(List<Menu> menuList, String menuName) {
-        for (Menu menu : menuList) {
-            if (menu.menuName.equals(menuName)) {
-                return menu;
-            }
+    private static int countItems(Menu menu, int itemCount, String itemType) {
+        if (itemType.equals(menu.menuType)) {
+            itemCount++;
         }
-        return null;
+        return itemCount;
+    }
+
+    private static int calculateDiscount(int itemCount, int discountAmountPerItem) {
+        return itemCount * WEEKDAYS_WEEKENDS_DISCOUNT_AMOUNT;
     }
 }

@@ -25,7 +25,8 @@ public class EventPlanner {
         OutputView.printPresentationStatus(presentationStatus);
         OutputView.printBenefitStatus();
         OutputView.printChristmasDdayDiscount(Benefit.chiristmasDdayDiscount(visitingDate));
-        OutputView.printWeekdayWeekendDiscount(orderList, visitingDate);
+        int weekdayWeekendDiscountAmount = Benefit.weekDaysWeekendsDiscount(orderList, visitingDate);
+        OutputView.printWeekdayWeekendDiscount(weekdayWeekendDiscountAmount);
     }
 
     public int inputVisitingDate() {

@@ -23,8 +23,11 @@ public class VisitingDate {
         return date;
     }
 
-    public static boolean isWeekend(int visitingDay) {
-        return weekendDays.contains(visitingDay);
+    public static boolean isWeekend(int visitingDate) {
+        if(weekendDays.contains(visitingDate)){
+            return true;
+        }
+        return false;
     }
 
     private static int validateIsNumeric(String dateInput) throws IllegalArgumentException {

@@ -23,5 +23,4 @@ public enum Menu {
         this.menuPrice = menuPrice;
         this.menuType = menuType;
     }
-
 }

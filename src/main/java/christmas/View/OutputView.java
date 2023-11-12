@@ -1,7 +1,9 @@
 package christmas.View;
 
 import christmas.Model.OrderedList;
+import java.text.NumberFormat;
 import java.util.List;
+import java.util.Locale;
 
 public class OutputView {
     private static final String INTRO_MESSAGE = "안녕하세요! 우테코 식당 12월 이벤트 플래너입니다.";
@@ -36,9 +38,12 @@ public class OutputView {
         System.out.println(menuName + SPACE_MESSAGE + quantity + MENU_COUNT_MESSAGE);
     }
 
-    public static void printTotalPrice(int TotalPrice) {
+    public static void printTotalPrice(int totalPrice) {
+        NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.KOREA);
+        String formattedTotalPrice = numberFormat.format(totalPrice);
+        
         System.out.println(BEFORE_BENEFIT_MESSAGE);
-        System.out.println(TotalPrice + WON_MESSAGE);
+        System.out.println(formattedTotalPrice + WON_MESSAGE);
         System.out.println();
     }
 }

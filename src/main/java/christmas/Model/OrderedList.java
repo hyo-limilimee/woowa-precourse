@@ -7,17 +7,15 @@ import java.util.List;
 import java.util.Set;
 
 public class OrderedList {
-    private final String menuName;
-    private final int menuQuantity;
+    public final String menuName;
+    public final int menuQuantity;
     private static final int MIN_ORDER_QUANTITY = 1;
-    private static Set<String> existingMenuNames = new HashSet<>();
+    private static Set<String> existingMenus = new HashSet<>();
 
     public OrderedList(String menuName, int menuQuantity) {
         this.menuName = menuName;
         this.menuQuantity = menuQuantity;
     }
-
-    private static Set<String> existingMenus = new HashSet<>();
 
     public static List<OrderedList> parseMenuInput(String menuInput) {
         List<OrderedList> orderList = new ArrayList<>();

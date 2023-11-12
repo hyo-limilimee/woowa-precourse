@@ -10,15 +10,14 @@ import java.util.List;
 public class EventPlanner {
 
     private VisitingDate visitingDate;
-    private OrderedList orderedList;
-
     public EventPlanner() {
     }
 
     public void run() {
         OutputView.printIntroMessage();
         inputVisitingDate();
-        inputMenu();
+        List<OrderedList> orderList = inputMenu();
+        OutputView.printOrderList(orderList);
 
 
     }

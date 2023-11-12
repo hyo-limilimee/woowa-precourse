@@ -62,4 +62,30 @@ public class OrderedListTest {
         int expectedTotalPrice = (Menu.PINE_MUSHROOM_SOUP.menuPrice * 2) + Menu.TAPAS.menuPrice;
         assertThat(totalPrice).isEqualTo(expectedTotalPrice);
     }
+
+    @DisplayName("총 주문 금액이 120,000원을 초과하는지 확인")
+    @Test
+    void isPresent_shouldReturnTrueIfTotalPriceExceedsLimit() {
+        List<OrderedList> orderList = new ArrayList<>();
+        orderList.add(new OrderedList("티본스테이크", 2));
+        orderList.add(new OrderedList("크리스마스파스타", 1));
+        orderList.add(new OrderedList("샴페인", 1));
+
+        int totalPrice = OrderedList.calculateTotalPrice(orderList);
+
+        assertThat(OrderedList.isPresent(totalPrice)).isTrue();
+    }
+
+    @DisplayName("총 주문 금액이 120,000원 이하인 경우 확인")
+    @Test
+    void isPresent_shouldReturnFalseIfTotalPriceDoesNotExceedLimit() {
+        List<OrderedList> orderList = new ArrayList<>();
+        orderList.add(new OrderedList("양송이수프", 2));
+        orderList.add(new OrderedList("크리스마스파스타", 1));
+        orderList.add(new OrderedList("아이스크림", 1));
+
+        int totalPrice = OrderedList.calculateTotalPrice(orderList);
+
+        assertThat(OrderedList.isPresent(totalPrice)).isFalse();
+    }
 }

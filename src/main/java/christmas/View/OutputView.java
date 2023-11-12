@@ -29,7 +29,7 @@ public class OutputView {
     }
 
     public static void printTotalPrice(int TotalPrice){
-        System.out.println(BEFORE_BENEFIT_MESSAGE + WON_MESSAGE);
-        System.out.println(TotalPrice);
+        System.out.println(BEFORE_BENEFIT_MESSAGE);
+        System.out.println(TotalPrice + WON_MESSAGE);
     }
 }

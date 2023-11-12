@@ -1,2 +1,4 @@
-package christmas.Model;public class Benefit {
+package christmas.Model;
+
+public class Benefit {
 }

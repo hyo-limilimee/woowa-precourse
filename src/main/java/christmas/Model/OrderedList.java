@@ -71,7 +71,7 @@ public class OrderedList {
     }
 
     private static void validateFormMenu(String menuName) {
-        if (!menuName.matches("[가-힣]+-\\d+")) {
+        if (!menuName.matches("[가-힣\\s]+-\\d+")) {
             ErrorMessages.menuInputError();
             throw new IllegalArgumentException();
         }

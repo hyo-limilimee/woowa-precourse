@@ -14,7 +14,8 @@ public class EventPlanner {
 
     public void run() {
         OutputView.printIntroMessage();
-        inputVisitingDate();
+        int visitingDate = inputVisitingDate();
+        OutputView.printVisitingDate(visitingDate);
         List<OrderedList> orderList = inputMenu();
         OutputView.printOrderList(orderList);
         int totalPrice = OrderedList.calculateTotalPrice(orderList);

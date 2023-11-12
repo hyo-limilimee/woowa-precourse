@@ -1,13 +1,5 @@
 package christmas.Model;
 
-import christmas.View.ErrorMessages;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
 public enum Menu {
     PINE_MUSHROOM_SOUP("양송이수프", 6_000, "appetizer"),
     TAPAS("타파스", 5_500, "appetizer"),
@@ -22,10 +14,9 @@ public enum Menu {
     RED_WINE("레드와인", 60_000, "drink"),
     CHAMPANE("샴페인", 25_000, "drink");
 
-    private String menuName;
-    private int menuPrice;
-    private String menuType;
-    private static final int MIN_MENU_QUANTITY = 1;
+    public String menuName;
+    public int menuPrice;
+    public String menuType;
 
     Menu(String menuName, int menuPrice, String menuType) {
         this.menuName = menuName;
@@ -33,75 +24,4 @@ public enum Menu {
         this.menuType = menuType;
     }
 
-    private static Set<String> existingMenus = new HashSet<>();
-
-    public static Map<String, Integer> parseMenuInput(String menuInput) {
-        Map<String, Integer> orderInfo = new HashMap<>();
-        String[] menuOrders = menuInput.split(",");
-        for (String menuOrder : menuOrders) {
-            validateFormMenu(menuOrder);
-            String[] menuNameAndQuantity = menuOrder.trim().split("-");
-            if (menuNameAndQuantity.length == 2) {
-                String menuName = menuNameAndQuantity[0];
-                String quantityStr = menuNameAndQuantity[1];
-                validateIsRightMenu(menuName);
-                validateDuplicatedMenu(menuName, existingMenus);  // Pass the existingMenus set
-                int quantity = validateIsNumeric(quantityStr);
-                validateNumberInRange(quantity);
-                orderInfo.put(menuName, quantity);
-            }
-        }
-        return orderInfo;
-    }
-
-    public static List<Map<String, Integer>> makeOrderInfoList(String[] menuInputs) {
-        List<Map<String, Integer>> orderInfoList = new ArrayList<>();
-
-        for (String menuInput : menuInputs) {
-            Map<String, Integer> orderInfo = parseMenuInput(menuInput);
-            orderInfoList.add(orderInfo);
-        }
-        return orderInfoList;
-    }
-
-    private static void validateIsRightMenu(String menuName) {
-        for (Menu menu : values()) {
-            if (menu.menuName.equals(menuName)) {
-                ErrorMessages.menuInputError();
-                throw new IllegalArgumentException();
-            }
-        }
-    }
-
-    private static void validateFormMenu(String menuName) {
-        if (!menuName.matches("[가-힣]+-\\d+")) {
-            ErrorMessages.menuInputError();
-            throw new IllegalArgumentException();
-        }
-    }
-
-    private static void validateDuplicatedMenu(String menuName, Set<String> existingMenu) {
-        if (existingMenu.contains(menuName)) {
-            ErrorMessages.menuInputError();
-            throw new IllegalArgumentException();
-        } else {
-            existingMenu.add(menuName);
-        }
-    }
-
-    private static int validateIsNumeric(String quantityStr) {
-        try {
-            return Integer.parseInt(quantityStr);
-        } catch (NumberFormatException e) {
-            ErrorMessages.menuInputError();
-            throw new IllegalArgumentException();
-        }
-    }
-
-    private static void validateNumberInRange(int quantity) {
-        if (quantity < MIN_MENU_QUANTITY) {
-            ErrorMessages.menuInputError();
-            throw new IllegalArgumentException();
-        }
-    }
 }

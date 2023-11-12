@@ -25,6 +25,7 @@ public class EventPlanner {
         OutputView.printPresentationStatus(presentationStatus);
         OutputView.printBenefitStatus();
         OutputView.printChristmasDdayDiscount(Benefit.chiristmasDdayDiscount(visitingDate));
+        OutputView.printWeekdayWeekendDiscount(orderList, visitingDate);
     }
 
     public int inputVisitingDate() {
@@ -45,4 +46,5 @@ public class EventPlanner {
             return inputMenu();
         }
     }
+
 }

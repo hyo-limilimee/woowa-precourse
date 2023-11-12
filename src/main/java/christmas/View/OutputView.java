@@ -1,6 +1,8 @@
 package christmas.View;
 
+import christmas.Model.Benefit;
 import christmas.Model.OrderedList;
+import christmas.Model.VisitingDate;
 import java.text.NumberFormat;
 import java.util.List;
 import java.util.Locale;
@@ -8,7 +10,7 @@ import java.util.Locale;
 public class OutputView {
     private static final String INTRO_MESSAGE = "안녕하세요! 우테코 식당 12월 이벤트 플래너입니다.";
     private static final String DECEMBER_MESSAGE = "12월 ";
-    private static final String BENEFIT_SHOW_MESSAGE = "에 우테코 식당에서 받을 이벤트 혜택 미리 보기!";
+    private static final String BENEFIT_SHOW_MESSAGE = "일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!";
     private static final String ORDERED_MENU_LIST_MESSAGE = "<주문 메뉴>";
     private static final String MENU_COUNT_MESSAGE = "개";
     private static final String SPACE_MESSAGE = " ";
@@ -19,7 +21,10 @@ public class OutputView {
     private static final String PRESENTATION_NONE_MESSAGE = "없음";
     private static final String BENEFIT_MESSAGE = "<혜택 내역>";
     private static final int MIN_DISCOUNT_AMOUNT = 0;
+    private static final String D_DAY_BENEFIT_MESSAGE = "크리스마스 디데이 할인: ";
     private static final String MINUS_MESSAGE = "-";
+    private static final String WEEKEND_DISCOUNT_MESSAGE = "주말 할인";
+    private static final String WEEKDAY_DISCOUNT_MESSAGE = "평일 할인";
 
     public static void printIntroMessage() {
         System.out.println(INTRO_MESSAGE);
@@ -55,7 +60,7 @@ public class OutputView {
 
     public static void printPresentationStatus(boolean presentStatus) {
         System.out.println(PRESENTATION_MESSAGE);
-        if(presentStatus == true){
+        if (presentStatus == true) {
             System.out.println(PRESENTATION_CHAMPAGNE_MESSAGE);
             System.out.println();
             return;
@@ -64,13 +69,24 @@ public class OutputView {
         System.out.println();
     }
 
-    public static void printBenefitStatus(){
+    public static void printBenefitStatus() {
         System.out.println(BENEFIT_MESSAGE);
     }
 
-    public static void printChristmasDdayDiscount(int discountAmount){
-        if(discountAmount > MIN_DISCOUNT_AMOUNT){
-            System.out.println(MINUS_MESSAGE + discountAmount+WON_MESSAGE);
+    public static void printChristmasDdayDiscount(int discountAmount) {
+        if (discountAmount > MIN_DISCOUNT_AMOUNT) {
+            System.out.println(D_DAY_BENEFIT_MESSAGE +MINUS_MESSAGE + discountAmount + WON_MESSAGE);
         }
     }
+
+    public static void printWeekdayWeekendDiscount(List<OrderedList> orderList, int visitingDay) {
+        int discount = Benefit.weekDaysWeekendsDiscount(orderList, visitingDay);
+
+        if (VisitingDate.isWeekend(visitingDay)) {
+            System.out.println(WEEKEND_DISCOUNT_MESSAGE + MINUS_MESSAGE + discount + WON_MESSAGE);
+            return;
+        }
+        System.out.println(WEEKDAY_DISCOUNT_MESSAGE + MINUS_MESSAGE + discount + WON_MESSAGE);
+    }
 }
+

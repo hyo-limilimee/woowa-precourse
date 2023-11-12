@@ -43,6 +43,23 @@ public class OrderedList {
         return orderList;
     }
 
+    public static int calculateTotalPrice(List<OrderedList> orderList) {
+        int totalPrice = 0;
+
+        for (OrderedList orderedItem : orderList) {
+            String menuName = orderedItem.menuName;
+            int quantity = orderedItem.menuQuantity;
+
+            for (Menu menu : Menu.values()) {
+                if (menu.menuName.equals(menuName)) {
+                    totalPrice += menu.menuPrice * quantity;
+                    break;
+                }
+            }
+        }
+        return totalPrice;
+    }
+
     private static void validateIsRightMenu(String menuName) {
         for (Menu menu : Menu.values()) {
             if (menu.menuName.equals(menuName)) {

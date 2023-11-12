@@ -2,14 +2,13 @@ package christmas.Controller;
 
 import christmas.Model.OrderedList;
 import christmas.Model.VisitingDate;
-import christmas.View.ErrorMessages;
 import christmas.View.InputView;
 import christmas.View.OutputView;
 import java.util.List;
 
 public class EventPlanner {
-
     private VisitingDate visitingDate;
+
     public EventPlanner() {
     }
 
@@ -18,8 +17,8 @@ public class EventPlanner {
         inputVisitingDate();
         List<OrderedList> orderList = inputMenu();
         OutputView.printOrderList(orderList);
-
-
+        int totalPrice = OrderedList.calculateTotalPrice(orderList);
+        OutputView.printTotalPrice(totalPrice);
     }
 
     public int inputVisitingDate() {
@@ -37,7 +36,6 @@ public class EventPlanner {
             List<OrderedList> orderList = OrderedList.parseMenuInput(menuInput);
             return orderList;
         } catch (IllegalArgumentException e) {
-            ErrorMessages.menuInputError();
             return inputMenu();
         }
     }

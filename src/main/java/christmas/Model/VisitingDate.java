@@ -12,6 +12,8 @@ public class VisitingDate {
     private static final List<Integer> weekendDays = Arrays.asList(
             1, 2, 8, 9, 15, 16, 22, 23, 29, 30
     );
+    private static final List<Integer> specialDays = Arrays.asList(
+            3, 10, 17, 24, 25, 31);
 
     public VisitingDate(String dateInput) {
         int dateInputNum = validateIsNumeric(dateInput);
@@ -19,12 +21,19 @@ public class VisitingDate {
         this.date = dateInputNum;
     }
 
-    public int getVisitingDate(){
+    public int getVisitingDate() {
         return date;
     }
 
     public static boolean isWeekend(int visitingDate) {
-        if(weekendDays.contains(visitingDate)){
+        if (weekendDays.contains(visitingDate)) {
+            return true;
+        }
+        return false;
+    }
+
+    public static boolean isSpecialDay(int visitingDate) {
+        if (specialDays.contains(visitingDate)) {
             return true;
         }
         return false;

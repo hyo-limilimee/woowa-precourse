@@ -8,6 +8,7 @@ public class Benefit {
     private static final int MINIMUM_D_DAY_DISCOUNT_AMOUNT = 1000;
     private static final int WEIGHT_D_DAY_DISCOUNT_AMOUNT = 100;
     private static final int WEEKDAYS_WEEKENDS_DISCOUNT_AMOUNT = 2023;
+    private static final int SPECIAL_DAY_DISCOUNT_AMOUNT = 1000;
 
     public static int chiristmasDdayDiscount(int visitingDate) {
         if (visitingDate <= LAST_DATE) {
@@ -31,7 +32,7 @@ public class Benefit {
             }
         }
 
-        int discountAmount = calculateDiscount(itemCount, WEEKDAYS_WEEKENDS_DISCOUNT_AMOUNT);
+        int discountAmount = calculateWeekDaysWeekendDiscount(itemCount, WEEKDAYS_WEEKENDS_DISCOUNT_AMOUNT);
 
         return discountAmount;
     }
@@ -43,7 +44,11 @@ public class Benefit {
         return itemCount;
     }
 
-    private static int calculateDiscount(int itemCount, int discountAmountPerItem) {
+    private static int calculateWeekDaysWeekendDiscount(int itemCount, int discountAmountPerItem) {
         return itemCount * WEEKDAYS_WEEKENDS_DISCOUNT_AMOUNT;
+    }
+
+    public static int calculateSpecialDaysDiscount(boolean isSpecialDay){
+        return SPECIAL_DAY_DISCOUNT_AMOUNT;
     }
 }

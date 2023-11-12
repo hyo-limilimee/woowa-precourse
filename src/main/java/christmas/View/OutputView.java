@@ -23,6 +23,7 @@ public class OutputView {
     private static final String MINUS_MESSAGE = "-";
     private static final String WEEKEND_DISCOUNT_MESSAGE = "주말 할인";
     private static final String WEEKDAY_DISCOUNT_MESSAGE = "평일 할인";
+    private static final String SPECIALDAY_DISCOUNT_MESSAGE = "특별 할인";
 
     public static void printIntroMessage() {
         System.out.println(INTRO_MESSAGE);
@@ -77,13 +78,19 @@ public class OutputView {
         }
     }
 
-    public static void printWeekdayWeekendDiscount(int discountAmount) {
+    public static void printWeekdayWeekendDiscount(int discountAmount, boolean isWeekend) {
         if (discountAmount > MIN_DISCOUNT_AMOUNT) {
-            System.out.println(WEEKDAY_DISCOUNT_MESSAGE + ":" + MINUS_MESSAGE + discountAmount + WON_MESSAGE);
-            System.out.println();
-            return;
+            if (isWeekend == false) {
+                System.out.println(WEEKDAY_DISCOUNT_MESSAGE + ": " + MINUS_MESSAGE + discountAmount + WON_MESSAGE);
+                return;
+            }
+            System.out.println(WEEKEND_DISCOUNT_MESSAGE + ": " + MINUS_MESSAGE + discountAmount + WON_MESSAGE);
         }
-        System.out.println(WEEKEND_DISCOUNT_MESSAGE + ":" + MINUS_MESSAGE + discountAmount + WON_MESSAGE);
-        System.out.println();
+    }
+
+    public static void printSpecialDayDiscount(int discountAmount) {
+        if (discountAmount > MIN_DISCOUNT_AMOUNT) {
+            System.out.println(SPECIALDAY_DISCOUNT_MESSAGE + ": " + MINUS_MESSAGE + discountAmount + WON_MESSAGE);
+        }
     }
 }

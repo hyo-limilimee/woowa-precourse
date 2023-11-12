@@ -1,5 +1,6 @@
 package christmas.Controller;
 
+import christmas.Model.Benefit;
 import christmas.Model.OrderedList;
 import christmas.Model.VisitingDate;
 import christmas.View.InputView;
@@ -22,6 +23,8 @@ public class EventPlanner {
         OutputView.printTotalPrice(totalPrice);
         boolean presentationStatus = OrderedList.isPresent(totalPrice);
         OutputView.printPresentationStatus(presentationStatus);
+        OutputView.printBenefitStatus();
+        OutputView.printChristmasDdayDiscount(Benefit.chiristmasDdayDiscount(visitingDate));
     }
 
     public int inputVisitingDate() {

@@ -17,6 +17,9 @@ public class OutputView {
     private static final String PRESENTATION_MESSAGE = "<증정 메뉴>";
     private static final String PRESENTATION_CHAMPAGNE_MESSAGE = "샴폐인 1개";
     private static final String PRESENTATION_NONE_MESSAGE = "없음";
+    private static final String BENEFIT_MESSAGE = "<혜택 내역>";
+    private static final int MIN_DISCOUNT_AMOUNT = 0;
+    private static final String MINUS_MESSAGE = "-";
 
     public static void printIntroMessage() {
         System.out.println(INTRO_MESSAGE);
@@ -54,8 +57,20 @@ public class OutputView {
         System.out.println(PRESENTATION_MESSAGE);
         if(presentStatus == true){
             System.out.println(PRESENTATION_CHAMPAGNE_MESSAGE);
+            System.out.println();
             return;
         }
         System.out.println(PRESENTATION_NONE_MESSAGE);
+        System.out.println();
+    }
+
+    public static void printBenefitStatus(){
+        System.out.println(BENEFIT_MESSAGE);
+    }
+
+    public static void printChristmasDdayDiscount(int discountAmount){
+        if(discountAmount > MIN_DISCOUNT_AMOUNT){
+            System.out.println(MINUS_MESSAGE + discountAmount+WON_MESSAGE);
+        }
     }
 }

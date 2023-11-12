@@ -60,6 +60,13 @@ public class OrderedList {
         return totalPrice;
     }
 
+    public static boolean isPresent(int totalPrice) {
+        if (totalPrice > 120000) {
+            return true;
+        }
+        return false;
+    }
+
     private static void validateIsRightMenu(String menuName) {
         for (Menu menu : Menu.values()) {
             if (menu.menuName.equals(menuName)) {

@@ -14,6 +14,9 @@ public class OutputView {
     private static final String SPACE_MESSAGE = " ";
     private static final String BEFORE_BENEFIT_MESSAGE = "<할인 전 총주문 금액>";
     private static final String WON_MESSAGE = "원";
+    private static final String PRESENTATION_MESSAGE = "<증정 메뉴>";
+    private static final String PRESENTATION_CHAMPAGNE_MESSAGE = "샴폐인 1개";
+    private static final String PRESENTATION_NONE_MESSAGE = "없음";
 
     public static void printIntroMessage() {
         System.out.println(INTRO_MESSAGE);
@@ -41,9 +44,18 @@ public class OutputView {
     public static void printTotalPrice(int totalPrice) {
         NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.KOREA);
         String formattedTotalPrice = numberFormat.format(totalPrice);
-        
+
         System.out.println(BEFORE_BENEFIT_MESSAGE);
         System.out.println(formattedTotalPrice + WON_MESSAGE);
         System.out.println();
+    }
+
+    public static void printPresentationStatus(boolean presentStatus) {
+        System.out.println(PRESENTATION_MESSAGE);
+        if(presentStatus == true){
+            System.out.println(PRESENTATION_CHAMPAGNE_MESSAGE);
+            return;
+        }
+        System.out.println(PRESENTATION_NONE_MESSAGE);
     }
 }

@@ -20,6 +20,8 @@ public class EventPlanner {
         OutputView.printOrderList(orderList);
         int totalPrice = OrderedList.calculateTotalPrice(orderList);
         OutputView.printTotalPrice(totalPrice);
+        boolean presentationStatus = OrderedList.isPresent(totalPrice);
+        OutputView.printPresentationStatus(presentationStatus);
     }
 
     public int inputVisitingDate() {

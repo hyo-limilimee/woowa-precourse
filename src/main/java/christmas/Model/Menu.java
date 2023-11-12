@@ -12,7 +12,7 @@ public enum Menu {
     ICECREAM("아이스크림", 5_000, "dessert"),
     ZERO_COLA("제로콜라", 3_000, "drink"),
     RED_WINE("레드와인", 60_000, "drink"),
-    CHAMPANE("샴페인", 25_000, "drink");
+    CHAMPAGNE("샴페인", 25_000, "drink");
 
     public String menuName;
     public int menuPrice;

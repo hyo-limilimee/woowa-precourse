@@ -28,6 +28,7 @@ public class EventPlanner {
         int weekdayWeekendDiscountAmount = Benefit.weekDaysWeekendsDiscount(orderList, visitingDate);
         OutputView.printWeekdayWeekendDiscount(weekdayWeekendDiscountAmount, VisitingDate.isWeekend(visitingDate));
         OutputView.printSpecialDayDiscount(Benefit.calculateSpecialDaysDiscount(VisitingDate.isSpecialDay(visitingDate)));
+        OutputView.printPresentationDiscount(Benefit.calculatePresentationDiscount(presentationStatus));
     }
 
     public int inputVisitingDate() {

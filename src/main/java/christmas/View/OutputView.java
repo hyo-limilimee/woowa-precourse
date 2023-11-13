@@ -25,6 +25,7 @@ public class OutputView {
     private static final String WEEKDAY_DISCOUNT_MESSAGE = "평일 할인";
     private static final String SPECIALDAY_DISCOUNT_MESSAGE = "특별 할인";
     private static final String PRESENTATION_DISCOUNT_MESSAGE = "증정 이벤트";
+    private static final String TOTAL_DISCOUNT_MESSAGE = "<총혜택 금액>";
 
     public static void printIntroMessage() {
         System.out.println(INTRO_MESSAGE);
@@ -99,5 +100,9 @@ public class OutputView {
         if (discountAmount > MIN_DISCOUNT_AMOUNT) {
             System.out.println(PRESENTATION_DISCOUNT_MESSAGE + ": " + MINUS_MESSAGE + discountAmount + WON_MESSAGE);
         }
+    }
+
+    public static void print(int discountAmount){
+        System.out.println(TOTAL_DISCOUNT_MESSAGE + discountAmount + WON_MESSAGE);
     }
 }

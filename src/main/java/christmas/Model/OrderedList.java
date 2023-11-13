@@ -31,7 +31,7 @@ public class OrderedList {
                 String quantityStr = menuNameAndQuantity[1];
 
                 validateIsRightMenu(menuName);
-                validateDuplicatedMenu(menuName, existingMenus);
+                validateDuplicatedMenu(menuName);
 
                 int quantity = validateIsNumeric(quantityStr);
                 validateNumberInRange(quantity);
@@ -93,13 +93,16 @@ public class OrderedList {
         }
     }
 
-    private static void validateDuplicatedMenu(String menuName, Set<String> existingMenu) {
-        if (existingMenu.contains(menuName)) {
-            ErrorMessages.menuInputError();
-            throw new IllegalArgumentException();
-        } else {
-            existingMenu.add(menuName);
+    private static void validateDuplicatedMenu(String menuName) {
+        Set<String> existingMenus = new HashSet<>();
+
+        for (String existingMenu : existingMenus) {
+            if (existingMenu.equals(menuName)) {
+                ErrorMessages.menuInputError();
+                throw new IllegalArgumentException("Duplicated menu: " + menuName);
+            }
         }
+        existingMenus.add(menuName);
     }
 
     private static int validateIsNumeric(String quantityStr) {

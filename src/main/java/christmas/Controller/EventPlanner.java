@@ -30,7 +30,8 @@ public class EventPlanner {
         boolean specialDayStatus = VisitingDate.isSpecialDay(visitingDate);
         OutputView.printSpecialDayDiscount(Benefit.calculateSpecialDaysDiscount(specialDayStatus));
         OutputView.printPresentationDiscount(Benefit.calculatePresentationDiscount(presentationStatus));
-        OutputView.printPresentationDiscount(Benefit.calculateTotalDiscount(orderList, visitingDate, specialDayStatus, presentationStatus));
+        OutputView.printPresentationDiscount(
+                Benefit.calculateTotalDiscount(orderList, visitingDate, specialDayStatus, presentationStatus));
     }
 
 

@@ -102,7 +102,7 @@ public class OutputView {
         }
     }
 
-    public static void print(int discountAmount) {
+    public static void printTotalDiscount(int discountAmount) {
         System.out.println(TOTAL_DISCOUNT_MESSAGE + discountAmount + WON_MESSAGE);
     }
 }

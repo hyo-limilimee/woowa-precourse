@@ -75,4 +75,14 @@ public class Benefit {
         return totalDiscountAmount;
     }
 
+    public static String evaluateEventBadge(int totalDiscountAmount) {
+        if (totalDiscountAmount > 20000) {
+            return "별";
+        } else if (totalDiscountAmount > 10000) {
+            return "트리";
+        } else if (totalDiscountAmount > 5000) {
+            return "별";
+        }
+        return "없음";
+    }
 }

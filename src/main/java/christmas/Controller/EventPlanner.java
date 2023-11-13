@@ -32,6 +32,8 @@ public class EventPlanner {
         OutputView.printPresentationDiscount(Benefit.calculatePresentationDiscount(presentationStatus));
         OutputView.printTotalDiscount(
                 Benefit.calculateTotalDiscount(orderList, visitingDate, specialDayStatus, presentationStatus));
+        OutputView.printEventBadge(Benefit.evaluateEventBadge(
+                Benefit.calculateTotalDiscount(orderList, visitingDate, specialDayStatus, presentationStatus)));
     }
 
 

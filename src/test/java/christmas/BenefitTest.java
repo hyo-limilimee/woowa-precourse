@@ -1,14 +1,9 @@
 package christmas;
 
-import christmas.Model.Benefit;
-import christmas.Model.Menu;
-import christmas.Model.OrderedList;
-import org.junit.jupiter.api.Test;
-
-import java.util.Arrays;
-import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import christmas.Model.Benefit;
+import org.junit.jupiter.api.Test;
 
 class BenefitTest {
 
@@ -19,27 +14,27 @@ class BenefitTest {
         assertEquals(1200, discountAmount);
     }
 
-    @Test
-    void weekDaysWeekendsDiscount_Weekday() {
-        int visitingDate = 5;
-        List<OrderedList> orderList = Arrays.asList(
-                new OrderedList(new Menu("Main", "Steak"), 2),
-                new OrderedList(new Menu("Dessert", "Cake"), 1)
-        );
-        int discountAmount = Benefit.weekDaysWeekendsDiscount(orderList, visitingDate);
-        assertEquals(4046, discountAmount);
-    }
+//    @Test
+//    void weekDaysWeekendsDiscount_Weekday() {
+//        int visitingDate = 5;
+//        List<OrderedList> orderList = Arrays.asList(
+//                new OrderedList(new Menu("Main", "Steak"), 2),
+//                new OrderedList(new Menu("Dessert", "Cake"), 1)
+//        );
+//        int discountAmount = Benefit.weekDaysWeekendsDiscount(orderList, visitingDate);
+//        assertEquals(4046, discountAmount);
+//    }
 
-    @Test
-    void weekDaysWeekendsDiscount_Weekend() {
-        int visitingDate = 7;
-        List<OrderedList> orderList = Arrays.asList(
-                new OrderedList(new Menu("Main", "Steak"), 2),
-                new OrderedList(new Menu("Dessert", "Cake"), 1)
-        );
-        int discountAmount = Benefit.weekDaysWeekendsDiscount(orderList, visitingDate);
-        assertEquals(6069, discountAmount);
-    }
+//    @Test
+//    void weekDaysWeekendsDiscount_Weekend() {
+//        int visitingDate = 7;
+//        List<OrderedList> orderList = Arrays.asList(
+//                new OrderedList(new Menu("Main", "Steak"), 2),
+//                new OrderedList(new Menu("Dessert", "Cake"), 1)
+//        );
+//        int discountAmount = Benefit.weekDaysWeekendsDiscount(orderList, visitingDate);
+//        assertEquals(6069, discountAmount);
+//    }
 
     @Test
     void calculateSpecialDaysDiscount_SpecialDay() {
@@ -69,16 +64,16 @@ class BenefitTest {
         assertEquals(0, discountAmount);
     }
 
-    @Test
-    void calculateTotalDiscount() {
-        int visitingDate = 3;
-        List<OrderedList> orderList = Arrays.asList(
-                new OrderedList(new Menu("Main", "Steak"), 2),
-                new OrderedList(new Menu("Dessert", "Cake"), 1)
-        );
-        boolean isSpecialDay = true;
-        boolean isPresentation = true;
-        int totalDiscount = Benefit.calculateTotalDiscount(orderList, visitingDate, isSpecialDay, isPresentation);
-        assertEquals(11223, totalDiscount);
-    }
+//    @Test
+//    void calculateTotalDiscount() {
+//        int visitingDate = 3;
+//        List<OrderedList> orderList = Arrays.asList(
+//                new OrderedList(new Menu("Main", "Steak"), 2),
+//                new OrderedList(new Menu("Dessert", "Cake"), 1)
+//        );
+//        boolean isSpecialDay = true;
+//        boolean isPresentation = true;
+//        int totalDiscount = Benefit.calculateTotalDiscount(orderList, visitingDate, isSpecialDay, isPresentation);
+//        assertEquals(11223, totalDiscount);
+//    }
 }

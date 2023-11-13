@@ -56,10 +56,23 @@ public class Benefit {
         return 0;
     }
 
-    public static int calculatePresentationDiscount(boolean isPresentation){
-        if(isPresentation == true) {
+    public static int calculatePresentationDiscount(boolean isPresentation) {
+        if (isPresentation == true) {
             return PRESENTATION_DISCOUNT_AMOUNT;
         }
         return 0;
     }
+
+    public static int calculateTotalDiscount(List<OrderedList> orderList, int visitingDate, boolean isSpecialDay,
+                                             boolean isPresentation) {
+        int totalDiscountAmount = 0;
+
+        totalDiscountAmount += chiristmasDdayDiscount(visitingDate);
+        totalDiscountAmount += weekDaysWeekendsDiscount(orderList, visitingDate);
+        totalDiscountAmount += calculateSpecialDaysDiscount(isSpecialDay);
+        totalDiscountAmount += calculatePresentationDiscount(isPresentation);
+
+        return totalDiscountAmount;
+    }
+
 }

@@ -13,6 +13,13 @@ public class Benefit {
     private static final int PRESENTATION_STANDARD_AMOUNT = 120000;
     private static final String MENU_TYPE_MAIN = "main";
     private static final String MENU_TYPE_DESSERT = "dessert";
+    private static final String SANTA_MESSAGE = "산타";
+    private static final String TREE_MESSAGE = "트리";
+    private static final String STAR_MESSAGE = "별";
+    private static final String NONE_MESSAGE = "없음";
+    private static final int TOTAL_DISCOUNT_AMOUNT_TWENTY_THOUSANDS = 20000;
+    private static final int TOTAL_DISCOUNT_AMOUNT_TEN_THOUSANDS = 10000;
+    private static final int TOTAL_DISCOUNT_AMOUNT_FIVE_THOUSANDS = 5000;
 
     private static int countMainItems(List<OrderedList> orderList, int visitingDate) {
         int mainCountWeekdays = 0;
@@ -101,13 +108,13 @@ public class Benefit {
     }
 
     public static String evaluateEventBadge(int totalDiscountAmount) {
-        if (totalDiscountAmount > 20000) {
-            return "산타";
-        } else if (totalDiscountAmount > 10000) {
-            return "트리";
-        } else if (totalDiscountAmount > 5000) {
-            return "별";
+        if (totalDiscountAmount > TOTAL_DISCOUNT_AMOUNT_TWENTY_THOUSANDS) {
+            return SANTA_MESSAGE;
+        } else if (totalDiscountAmount > TOTAL_DISCOUNT_AMOUNT_TEN_THOUSANDS) {
+            return TREE_MESSAGE;
+        } else if (totalDiscountAmount > TOTAL_DISCOUNT_AMOUNT_FIVE_THOUSANDS) {
+            return STAR_MESSAGE;
         }
-        return "없음";
+        return NONE_MESSAGE;
     }
 }

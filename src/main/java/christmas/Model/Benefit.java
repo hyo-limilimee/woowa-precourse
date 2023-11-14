@@ -64,13 +64,19 @@ public class Benefit {
     }
 
     public static int calculateTotalDiscount(List<OrderedList> orderList, int visitingDate, boolean isSpecialDay,
-                                             boolean isPresentation) {
+                                             boolean isPresentation, int totalPrice) {
         int totalDiscountAmount = 0;
+
+        boolean eventAppliedCase = isOrderEligibleForEvents(orderList, totalPrice);
 
         totalDiscountAmount += chiristmasDdayDiscount(visitingDate);
         totalDiscountAmount += weekDaysWeekendsDiscount(orderList, visitingDate);
         totalDiscountAmount += calculateSpecialDaysDiscount(isSpecialDay);
         totalDiscountAmount += calculatePresentationDiscount(isPresentation);
+
+        if (eventAppliedCase == false) {
+            totalDiscountAmount = 0;
+        }
 
         return totalDiscountAmount;
     }
@@ -84,5 +90,31 @@ public class Benefit {
             return "별";
         }
         return "없음";
+    }
+
+    public static boolean isOrderEligibleForEvents(List<OrderedList> orderList, int totalPrice) {
+        if (totalPrice >= 10000) {
+            if (containsOnlyBeverages(orderList)) {
+                return false;
+            }
+
+            if (orderList.size() > 20) {
+                return false;
+            }
+
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private static boolean containsOnlyBeverages(List<OrderedList> orderList) {
+        for (OrderedList orderedItem : orderList) {
+            Menu menu = orderedItem.getMenu();
+            if (!menu.menuType.equals("drink")) {
+                return false;
+            }
+        }
+        return true;
     }
 }

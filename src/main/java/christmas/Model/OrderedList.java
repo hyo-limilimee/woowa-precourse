@@ -42,18 +42,6 @@ public class OrderedList {
         }
     }
 
-    public static void validateDuplicatedMenu(String menuName) {
-        Set<String> existingMenus = new HashSet<>();
-
-        for (String existingMenu : existingMenus) {
-            if (existingMenu.equals(menuName)) {
-                ErrorMessages.menuInputError();
-                throw new IllegalArgumentException("Duplicated menu: " + menuName);
-            }
-        }
-        existingMenus.add(menuName);
-    }
-
     public static int validateIsNumeric(String quantityStr) {
         try {
             return Integer.parseInt(quantityStr);

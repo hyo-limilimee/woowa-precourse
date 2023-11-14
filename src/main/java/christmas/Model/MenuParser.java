@@ -1,7 +1,10 @@
 package christmas.Model;
 
+import christmas.View.ErrorMessages;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class MenuParser {
 
@@ -29,9 +32,23 @@ public class MenuParser {
         }
     }
 
+    public static void validateDuplicatedMenu(List<OrderedList> orderedList) {
+        Set<String> existingMenuNames = new HashSet<>();
+
+        for (OrderedList orderedItem : orderedList) {
+            String menuName = orderedItem.menuName;
+
+            if (existingMenuNames.contains(menuName)) {
+                ErrorMessages.menuInputError();
+                throw new IllegalArgumentException();
+            }
+            existingMenuNames.add(menuName);
+        }
+    }
+
     private static void processMenuDetails(String menuName, String quantityStr, List<OrderedList> orderList) {
         OrderedList.validateIsRightMenu(menuName);
-        OrderedList.validateDuplicatedMenu(menuName);
+        validateDuplicatedMenu(orderList);
 
         int quantity = OrderedList.validateIsNumeric(quantityStr);
         OrderedList.validateNumberInRange(quantity);

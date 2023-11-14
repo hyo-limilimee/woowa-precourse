@@ -68,7 +68,7 @@ public class Benefit {
                                              boolean isPresentation, int totalPrice) {
         int totalDiscountAmount = 0;
 
-        boolean eventAppliedCase = isOrderEligibleForEvents(orderList, totalPrice);
+        boolean eventAppliedCase = CheckEventPossibility.isOrderEligibleForEvents(orderList, totalPrice);
 
         totalDiscountAmount += chiristmasDdayDiscount(visitingDate);
         totalDiscountAmount += weekDaysWeekendsDiscount(orderList, visitingDate);
@@ -91,31 +91,5 @@ public class Benefit {
             return "별";
         }
         return "없음";
-    }
-
-    public static boolean isOrderEligibleForEvents(List<OrderedList> orderList, int totalPrice) {
-        if (totalPrice >= 10000) {
-            if (containsOnlyBeverages(orderList)) {
-                return false;
-            }
-
-            if (orderList.size() > 20) {
-                return false;
-            }
-
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    private static boolean containsOnlyBeverages(List<OrderedList> orderList) {
-        for (OrderedList orderedItem : orderList) {
-            Menu menu = orderedItem.getMenu();
-            if (!menu.getMenuType().equals("drink")) {
-                return false;
-            }
-        }
-        return true;
     }
 }

@@ -1,7 +1,6 @@
 package christmas.Model;
 
 import christmas.View.ErrorMessages;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -15,32 +14,6 @@ public class OrderedList {
     public OrderedList(String menuName, int menuQuantity) {
         this.menuName = menuName;
         this.menuQuantity = menuQuantity;
-    }
-
-    public static List<OrderedList> parseMenuInput(String menuInput) {
-        List<OrderedList> orderList = new ArrayList<>();
-        String[] menuOrders = menuInput.split(",");
-
-        for (String menuOrder : menuOrders) {
-            validateFormMenu(menuOrder);
-
-            String[] menuNameAndQuantity = menuOrder.trim().split("-");
-
-            if (menuNameAndQuantity.length == 2) {
-                String menuName = menuNameAndQuantity[0];
-                String quantityStr = menuNameAndQuantity[1];
-
-                validateIsRightMenu(menuName);
-                validateDuplicatedMenu(menuName);
-
-                int quantity = validateIsNumeric(quantityStr);
-                validateNumberInRange(quantity);
-
-                OrderedList orderedItem = new OrderedList(menuName, quantity);
-                orderList.add(orderedItem);
-            }
-        }
-        return orderList;
     }
 
     public Menu getMenu() {
@@ -76,7 +49,7 @@ public class OrderedList {
         return false;
     }
 
-    private static void validateIsRightMenu(String menuName) {
+    public static void validateIsRightMenu(String menuName) {
         for (Menu menu : Menu.values()) {
             if (menu.getMenuName().equals(menuName)) {
                 return;
@@ -86,14 +59,14 @@ public class OrderedList {
         throw new IllegalArgumentException();
     }
 
-    private static void validateFormMenu(String menuName) {
+    public static void validateFormMenu(String menuName) {
         if (!menuName.matches("[가-힣\\s]+-\\d+")) {
             ErrorMessages.menuInputError();
             throw new IllegalArgumentException();
         }
     }
 
-    private static void validateDuplicatedMenu(String menuName) {
+    public static void validateDuplicatedMenu(String menuName) {
         Set<String> existingMenus = new HashSet<>();
 
         for (String existingMenu : existingMenus) {
@@ -105,7 +78,7 @@ public class OrderedList {
         existingMenus.add(menuName);
     }
 
-    private static int validateIsNumeric(String quantityStr) {
+    public static int validateIsNumeric(String quantityStr) {
         try {
             return Integer.parseInt(quantityStr);
         } catch (NumberFormatException e) {
@@ -114,7 +87,7 @@ public class OrderedList {
         }
     }
 
-    private static void validateNumberInRange(int quantity) {
+    public static void validateNumberInRange(int quantity) {
         if (quantity < MIN_ORDER_QUANTITY) {
             ErrorMessages.menuInputError();
             throw new IllegalArgumentException();

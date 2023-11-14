@@ -1,6 +1,7 @@
 package christmas.Controller;
 
 import christmas.Model.Benefit;
+import christmas.Model.MenuParser;
 import christmas.Model.OrderedList;
 import christmas.Model.VisitingDate;
 import christmas.View.InputView;
@@ -32,7 +33,7 @@ public class EventPlanner {
     public List<OrderedList> inputMenu() {
         try {
             String menuInput = InputView.readMenu();
-            List<OrderedList> orderList = OrderedList.parseMenuInput(menuInput);
+            List<OrderedList> orderList = MenuParser.parseMenuInput(menuInput);
             return orderList;
         } catch (IllegalArgumentException e) {
             return inputMenu();
@@ -52,31 +53,27 @@ public class EventPlanner {
     }
 
     private void printEventDetails(int visitingDate, List<OrderedList> orderList) {
+
         printVisitingInformation(visitingDate);
         printOrderInformation(orderList);
 
         int totalPrice = OrderedList.calculateTotalPrice(orderList);
-        OutputView.printTotalPrice(totalPrice);
-
         boolean presentationStatus = OrderedList.isPresent(totalPrice);
-        OutputView.printPresentationStatus(presentationStatus);
-
         int weekdayWeekendDiscountAmount = Benefit.weekDaysWeekendsDiscount(orderList, visitingDate);
-
-        OutputView.printChristmasDdayDiscount(Benefit.chiristmasDdayDiscount(visitingDate));
         boolean specialDayStatus = VisitingDate.isSpecialDay(visitingDate);
-        int totalDiscount = Benefit.calculateTotalDiscount(orderList, visitingDate, specialDayStatus, presentationStatus, totalPrice);
+        int totalDiscount = Benefit.calculateTotalDiscount(orderList, visitingDate, specialDayStatus,
+                presentationStatus, totalPrice);
+        int benefitAppliedAmount = totalPrice - totalDiscount;
 
+        OutputView.printTotalPrice(totalPrice);
+        OutputView.printPresentationStatus(presentationStatus);
         OutputView.printBenefitStatus(totalDiscount);
+        OutputView.printChristmasDdayDiscount(Benefit.chiristmasDdayDiscount(visitingDate));
         OutputView.printWeekdayWeekendDiscount(weekdayWeekendDiscountAmount, VisitingDate.isWeekend(visitingDate));
         OutputView.printSpecialDayDiscount(Benefit.calculateSpecialDaysDiscount(specialDayStatus));
         OutputView.printPresentationDiscount(Benefit.calculatePresentationDiscount(presentationStatus));
-
         OutputView.printTotalDiscount(totalDiscount);
-
         OutputView.printEventBadge(Benefit.evaluateEventBadge(totalDiscount));
-
-        int benefitAppliedAmount = totalPrice - totalDiscount;
         OutputView.printBenefitAppliedAmount(benefitAppliedAmount);
     }
 }

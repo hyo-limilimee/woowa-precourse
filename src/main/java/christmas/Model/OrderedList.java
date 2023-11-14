@@ -45,7 +45,7 @@ public class OrderedList {
 
     public Menu getMenu() {
         for (Menu menu : Menu.values()) {
-            if (menu.menuName.equals(menuName)) {
+            if (menu.getMenuName().equals(menuName)) {
                 return menu;
             }
         }
@@ -60,8 +60,8 @@ public class OrderedList {
             int quantity = orderedItem.menuQuantity;
 
             for (Menu menu : Menu.values()) {
-                if (menu.menuName.equals(menuName)) {
-                    totalPrice += menu.menuPrice * quantity;
+                if (menu.getMenuName().equals(menuName)) {
+                    totalPrice += menu.getMenuPrice() * quantity;
                     break;
                 }
             }
@@ -78,7 +78,7 @@ public class OrderedList {
 
     private static void validateIsRightMenu(String menuName) {
         for (Menu menu : Menu.values()) {
-            if (menu.menuName.equals(menuName)) {
+            if (menu.getMenuName().equals(menuName)) {
                 return;
             }
         }

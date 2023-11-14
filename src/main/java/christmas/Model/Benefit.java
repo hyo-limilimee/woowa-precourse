@@ -40,7 +40,7 @@ public class Benefit {
     }
 
     private static int countItems(Menu menu, int itemCount, String itemType) {
-        if (itemType.equals(menu.menuType)) {
+        if (itemType.equals(menu.getMenuType())) {
             itemCount++;
         }
         return itemCount;
@@ -112,7 +112,7 @@ public class Benefit {
     private static boolean containsOnlyBeverages(List<OrderedList> orderList) {
         for (OrderedList orderedItem : orderList) {
             Menu menu = orderedItem.getMenu();
-            if (!menu.menuType.equals("drink")) {
+            if (!menu.getMenuType().equals("drink")) {
                 return false;
             }
         }

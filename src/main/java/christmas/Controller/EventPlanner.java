@@ -15,9 +15,44 @@ public class EventPlanner {
 
     public void run() {
         printIntro();
+
         int visitingDate = inputVisitingDate();
+        printEventDetails(visitingDate, inputMenu());
+    }
+
+    public int inputVisitingDate() {
+        try {
+            visitingDate = new VisitingDate(InputView.readDate());
+            return visitingDate.getVisitingDate();
+        } catch (IllegalArgumentException e) {
+            return inputVisitingDate();
+        }
+    }
+
+    public List<OrderedList> inputMenu() {
+        try {
+            String menuInput = InputView.readMenu();
+            List<OrderedList> orderList = OrderedList.parseMenuInput(menuInput);
+            return orderList;
+        } catch (IllegalArgumentException e) {
+            return inputMenu();
+        }
+    }
+
+    private void printIntro() {
+        OutputView.printIntroMessage();
+    }
+
+    private void printVisitingInformation(int visitingDate) {
+        OutputView.printVisitingDate(visitingDate);
+    }
+
+    private void printOrderInformation(List<OrderedList> orderList) {
+        OutputView.printOrderList(orderList);
+    }
+
+    private void printEventDetails(int visitingDate, List<OrderedList> orderList) {
         printVisitingInformation(visitingDate);
-        List<OrderedList> orderList = inputMenu();
         printOrderInformation(orderList);
 
         int totalPrice = OrderedList.calculateTotalPrice(orderList);
@@ -44,37 +79,4 @@ public class EventPlanner {
         int benefitAppliedAmount = totalPrice - totalDiscount;
         OutputView.printBenefitAppliedAmount(benefitAppliedAmount);
     }
-
-    private void printIntro() {
-        OutputView.printIntroMessage();
-    }
-
-    private void printVisitingInformation(int visitingDate) {
-        OutputView.printVisitingDate(visitingDate);
-    }
-
-    private void printOrderInformation(List<OrderedList> orderList) {
-        OutputView.printOrderList(orderList);
-    }
-
-
-    public int inputVisitingDate() {
-        try {
-            visitingDate = new VisitingDate(InputView.readDate());
-            return visitingDate.getVisitingDate();
-        } catch (IllegalArgumentException e) {
-            return inputVisitingDate();
-        }
-    }
-
-    public List<OrderedList> inputMenu() {
-        try {
-            String menuInput = InputView.readMenu();
-            List<OrderedList> orderList = OrderedList.parseMenuInput(menuInput);
-            return orderList;
-        } catch (IllegalArgumentException e) {
-            return inputMenu();
-        }
-    }
-
 }

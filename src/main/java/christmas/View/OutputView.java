@@ -72,8 +72,11 @@ public class OutputView {
         System.out.println();
     }
 
-    public static void printBenefitStatus() {
+    public static void printBenefitStatus(int totalDiscountAmount) {
         System.out.println(BENEFIT_MESSAGE);
+        if (totalDiscountAmount == 0){
+            System.out.println("없음");
+        }
     }
 
     public static void printChristmasDdayDiscount(int discountAmount) {

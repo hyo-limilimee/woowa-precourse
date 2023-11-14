@@ -14,29 +14,47 @@ public class EventPlanner {
     }
 
     public void run() {
-        OutputView.printIntroMessage();
+        printIntro();
         int visitingDate = inputVisitingDate();
-        OutputView.printVisitingDate(visitingDate);
+        printVisitingInformation(visitingDate);
         List<OrderedList> orderList = inputMenu();
-        OutputView.printOrderList(orderList);
+        printOrderInformation(orderList);
+
         int totalPrice = OrderedList.calculateTotalPrice(orderList);
         OutputView.printTotalPrice(totalPrice);
+
         boolean presentationStatus = OrderedList.isPresent(totalPrice);
         OutputView.printPresentationStatus(presentationStatus);
-        OutputView.printBenefitStatus();
-        OutputView.printChristmasDdayDiscount(Benefit.chiristmasDdayDiscount(visitingDate));
+
         int weekdayWeekendDiscountAmount = Benefit.weekDaysWeekendsDiscount(orderList, visitingDate);
-        OutputView.printWeekdayWeekendDiscount(weekdayWeekendDiscountAmount, VisitingDate.isWeekend(visitingDate));
+
+        OutputView.printChristmasDdayDiscount(visitingDate);
         boolean specialDayStatus = VisitingDate.isSpecialDay(visitingDate);
+        int totalDiscount = Benefit.calculateTotalDiscount(orderList, visitingDate, specialDayStatus, presentationStatus);
+
+        OutputView.printBenefitStatus(totalDiscount);
+        OutputView.printWeekdayWeekendDiscount(weekdayWeekendDiscountAmount, VisitingDate.isWeekend(visitingDate));
         OutputView.printSpecialDayDiscount(Benefit.calculateSpecialDaysDiscount(specialDayStatus));
         OutputView.printPresentationDiscount(Benefit.calculatePresentationDiscount(presentationStatus));
-        OutputView.printTotalDiscount(
-                Benefit.calculateTotalDiscount(orderList, visitingDate, specialDayStatus, presentationStatus));
-        OutputView.printEventBadge(Benefit.evaluateEventBadge(
-                Benefit.calculateTotalDiscount(orderList, visitingDate, specialDayStatus, presentationStatus)));
 
-        int benefitAppliedAmount = totalPrice - Benefit.calculateTotalDiscount(orderList, visitingDate, specialDayStatus, presentationStatus);
+        OutputView.printTotalDiscount(totalDiscount);
+
+        OutputView.printEventBadge(Benefit.evaluateEventBadge(totalDiscount));
+
+        int benefitAppliedAmount = totalPrice - totalDiscount;
         OutputView.printBenefitAppliedAmount(benefitAppliedAmount);
+    }
+
+    private void printIntro() {
+        OutputView.printIntroMessage();
+    }
+
+    private void printVisitingInformation(int visitingDate) {
+        OutputView.printVisitingDate(visitingDate);
+    }
+
+    private void printOrderInformation(List<OrderedList> orderList) {
+        OutputView.printOrderList(orderList);
     }
 
 

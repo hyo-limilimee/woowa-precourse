@@ -1,7 +1,5 @@
 package christmas.Model;
 
-import java.util.List;
-
 public enum Menu {
     PINE_MUSHROOM_SOUP("양송이수프", 6_000, "appetizer"),
     TAPAS("타파스", 5_500, "appetizer"),
@@ -24,14 +22,5 @@ public enum Menu {
         this.menuName = menuName;
         this.menuPrice = menuPrice;
         this.menuType = menuType;
-    }
-
-    private static Menu findMenuByName(List<Menu> menuList, String menuName) {
-        for (Menu menu : menuList) {
-            if (menu.menuName.equals(menuName)) {
-                return menu;
-            }
-        }
-        return null;
     }
 }

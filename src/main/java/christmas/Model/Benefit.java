@@ -29,9 +29,8 @@ public class Benefit {
 
             if (VisitingDate.isWeekend(visitingDate)) {
                 itemCount = countItems(menu, itemCount, "main");
-            } else {
-                itemCount = countItems(menu, itemCount, "dessert");
             }
+            itemCount = countItems(menu, itemCount, "dessert");
         }
 
         int discountAmount = calculateWeekDaysWeekendDiscount(itemCount, WEEKDAYS_WEEKENDS_DISCOUNT_AMOUNT);
@@ -68,7 +67,7 @@ public class Benefit {
                                              boolean isPresentation, int totalPrice) {
         int totalDiscountAmount = 0;
 
-        boolean eventAppliedCase = CheckEventPossibility.isOrderEligibleForEvents(orderList, totalPrice);
+        boolean eventAppliedCase = CheckEventPossibility.isPossibleApplyEvents(totalPrice, orderList);
 
         totalDiscountAmount += chiristmasDdayDiscount(visitingDate);
         totalDiscountAmount += weekDaysWeekendsDiscount(orderList, visitingDate);

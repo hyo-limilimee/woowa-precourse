@@ -8,6 +8,7 @@ public class OrderedList {
     public final String menuName;
     public final int menuQuantity;
     private static final int MIN_ORDER_QUANTITY = 1;
+    private static final String MENU_INPUT_FORM = "[가-힣\\s]+-\\d+";
     private static Set<String> existingMenus = new HashSet<>();
 
     public OrderedList(String menuName, int menuQuantity) {
@@ -24,8 +25,6 @@ public class OrderedList {
         throw new IllegalStateException();
     }
 
-
-
     public static void validateIsRightMenu(String menuName) {
         for (Menu menu : Menu.values()) {
             if (menu.getMenuName().equals(menuName)) {
@@ -37,7 +36,7 @@ public class OrderedList {
     }
 
     public static void validateFormMenu(String menuName) {
-        if (!menuName.matches("[가-힣\\s]+-\\d+")) {
+        if (!menuName.matches(MENU_INPUT_FORM)) {
             ErrorMessages.menuInputError();
             throw new IllegalArgumentException();
         }

@@ -20,6 +20,8 @@ public class EventPlanner {
 
         int visitingDate = inputVisitingDate();
         printEventDetails(visitingDate, inputMenu());
+
+
     }
 
     public int inputVisitingDate() {
@@ -35,7 +37,9 @@ public class EventPlanner {
         try {
             String menuInput = InputView.readMenu();
             List<OrderedList> orderList = MenuParser.parseMenuInput(menuInput);
+
             return orderList;
+
         } catch (IllegalArgumentException e) {
             return inputMenu();
         }
@@ -70,7 +74,8 @@ public class EventPlanner {
     }
 
     private void printOutputViews(int totalPrice, boolean presentationStatus, int weekdayWeekendDiscountAmount,
-                                  boolean specialDayStatus, int totalDiscount, int benefitAppliedAmount, int visitingDate) {
+                                  boolean specialDayStatus, int totalDiscount, int benefitAppliedAmount,
+                                  int visitingDate) {
         OutputView.printTotalPrice(totalPrice);
         OutputView.printPresentationStatus(presentationStatus);
         OutputView.printBenefitStatus(totalDiscount);

@@ -1,13 +1,12 @@
 package christmas.Model;
 
-import christmas.View.ErrorMessages;
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
+import java.util.Map;
 
 public class MenuParser {
-
     public static List<OrderedList> parseMenuInput(String menuInput) {
         List<OrderedList> orderList = new ArrayList<>();
         String[] menuOrders = menuInput.split(",");
@@ -32,28 +31,15 @@ public class MenuParser {
         }
     }
 
-    public static void validateDuplicatedMenu(List<OrderedList> orderedList) {
-        Set<String> existingMenuNames = new HashSet<>();
-
-        for (OrderedList orderedItem : orderedList) {
-            String menuName = orderedItem.menuName;
-
-            if (existingMenuNames.contains(menuName)) {
-                ErrorMessages.menuInputError();
-                throw new IllegalArgumentException();
-            }
-            existingMenuNames.add(menuName);
-        }
-    }
-
     private static void processMenuDetails(String menuName, String quantityStr, List<OrderedList> orderList) {
         OrderedList.validateIsRightMenu(menuName);
-        validateDuplicatedMenu(orderList);
 
         int quantity = OrderedList.validateIsNumeric(quantityStr);
         OrderedList.validateNumberInRange(quantity);
 
-        OrderedList orderedItem = new OrderedList(menuName, quantity);
+        Map<String, Integer> menuDetails = new HashMap<>();
+        menuDetails.put(menuName, quantity);
+        OrderedList orderedItem = new OrderedList(Collections.singletonList(menuDetails));
         orderList.add(orderedItem);
     }
 }

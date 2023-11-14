@@ -3,7 +3,7 @@ package christmas.Model;
 import java.util.List;
 
 public class MenuPriceCalculator {
-    private static final int PRESENTATION_STANDARD_AMOUNT = 120000;
+
     public static int calculateTotalPrice(List<OrderedList> orderList) {
         int totalPrice = 0;
 
@@ -30,12 +30,5 @@ public class MenuPriceCalculator {
             return totalPrice + menu.getMenuPrice() * quantity;
         }
         return totalPrice;
-    }
-
-    public static boolean isPresent(int totalPrice) {
-        if (totalPrice > PRESENTATION_STANDARD_AMOUNT) {
-            return true;
-        }
-        return false;
     }
 }

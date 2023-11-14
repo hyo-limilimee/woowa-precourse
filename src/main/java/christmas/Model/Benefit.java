@@ -10,6 +10,49 @@ public class Benefit {
     private static final int WEEKDAYS_WEEKENDS_DISCOUNT_AMOUNT = 2023;
     private static final int SPECIAL_DAY_DISCOUNT_AMOUNT = 1000;
     private static final int PRESENTATION_DISCOUNT_AMOUNT = 25000;
+    private static final int PRESENTATION_STANDARD_AMOUNT = 120000;
+    private static final String MENU_TYPE_MAIN = "main";
+    private static final String MENU_TYPE_DESSERT = "dessert";
+
+    private static int countMainItems(List<OrderedList> orderList, int visitingDate) {
+        int mainCountWeekdays = 0;
+
+        for (OrderedList orderedItem : orderList) {
+            Menu menu = orderedItem.getMenu();
+
+            if (VisitingDate.isWeekend(visitingDate) && MENU_TYPE_MAIN.equals(menu.getMenuType())) {
+                mainCountWeekdays += orderedItem.menuQuantity;
+            }
+        }
+        return mainCountWeekdays;
+    }
+
+    private static int countDessertItems(List<OrderedList> orderList, int visitingDate) {
+        int dessertCountWeekends = 0;
+
+        for (OrderedList orderedItem : orderList) {
+            Menu menu = orderedItem.getMenu();
+
+            if (!VisitingDate.isWeekend(visitingDate) && MENU_TYPE_DESSERT.equals(menu.getMenuType())) {
+                dessertCountWeekends += orderedItem.menuQuantity;
+            }
+        }
+        return dessertCountWeekends;
+    }
+
+    public static int weekDaysWeekendsDiscount(List<OrderedList> orderList, int visitingDate) {
+        int mainCountWeekdays = countMainItems(orderList, visitingDate);
+        int dessertCountWeekends = countDessertItems(orderList, visitingDate);
+
+        return calculateWeekDaysWeekendDiscount(mainCountWeekdays, dessertCountWeekends);
+    }
+
+    public static boolean isPresent(int totalPrice) {
+        if (totalPrice > PRESENTATION_STANDARD_AMOUNT) {
+            return true;
+        }
+        return false;
+    }
 
     public static int chiristmasDdayDiscount(int visitingDate) {
         if (visitingDate <= LAST_DATE) {
@@ -21,41 +64,8 @@ public class Benefit {
         return discountAmount;
     }
 
-    public static int weekDaysWeekendsDiscount(List<OrderedList> orderList, int visitingDate) {
-        int mainItemCountWeekdays = countMainItems(orderList, visitingDate);
-        int dessertItemCountWeekends = countDessertItems(orderList, visitingDate);
-
-        return calculateWeekDaysWeekendDiscount(mainItemCountWeekdays, dessertItemCountWeekends, WEEKDAYS_WEEKENDS_DISCOUNT_AMOUNT);
-    }
-
-    private static int countMainItems(List<OrderedList> orderList, int visitingDate) {
-        int mainItemCountWeekdays = 0;
-
-        for (OrderedList orderedItem : orderList) {
-            Menu menu = orderedItem.getMenu();
-
-            if (VisitingDate.isWeekend(visitingDate) && "main".equals(menu.getMenuType())) {
-                mainItemCountWeekdays += orderedItem.menuQuantity;
-            }
-        }
-        return mainItemCountWeekdays;
-    }
-
-    private static int countDessertItems(List<OrderedList> orderList, int visitingDate) {
-        int dessertItemCountWeekends = 0;
-
-        for (OrderedList orderedItem : orderList) {
-            Menu menu = orderedItem.getMenu();
-
-            if (!VisitingDate.isWeekend(visitingDate) && "dessert".equals(menu.getMenuType())) {
-                dessertItemCountWeekends += orderedItem.menuQuantity;
-            }
-        }
-        return dessertItemCountWeekends;
-    }
-
-    private static int calculateWeekDaysWeekendDiscount(int mainItemCountWeekdays, int dessertItemCountWeekends, int discountAmountPerItem) {
-        return (mainItemCountWeekdays * discountAmountPerItem) + (dessertItemCountWeekends * discountAmountPerItem);
+    private static int calculateWeekDaysWeekendDiscount(int mainItemCountWeekdays, int dessertItemCountWeekends) {
+        return (mainItemCountWeekdays * WEEKDAYS_WEEKENDS_DISCOUNT_AMOUNT) + (dessertItemCountWeekends * WEEKDAYS_WEEKENDS_DISCOUNT_AMOUNT);
     }
 
     public static int calculateSpecialDaysDiscount(boolean isSpecialDay) {

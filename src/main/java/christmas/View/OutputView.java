@@ -16,15 +16,15 @@ public class OutputView {
     private static final String WON_MESSAGE = "원";
     private static final String PRESENTATION_MESSAGE = "<증정 메뉴>";
     private static final String PRESENTATION_CHAMPAGNE_MESSAGE = "샴폐인 1개";
-    private static final String PRESENTATION_NONE_MESSAGE = "없음";
+    private static final String NONE_MESSAGE = "없음";
     private static final String BENEFIT_MESSAGE = "<혜택 내역>";
     private static final int MIN_DISCOUNT_AMOUNT = 0;
     private static final String D_DAY_BENEFIT_MESSAGE = "크리스마스 디데이 할인: ";
     private static final String MINUS_MESSAGE = "-";
-    private static final String WEEKEND_DISCOUNT_MESSAGE = "주말 할인";
-    private static final String WEEKDAY_DISCOUNT_MESSAGE = "평일 할인";
-    private static final String SPECIALDAY_DISCOUNT_MESSAGE = "특별 할인";
-    private static final String PRESENTATION_DISCOUNT_MESSAGE = "증정 이벤트";
+    private static final String WEEKEND_DISCOUNT_MESSAGE = "주말 할인: ";
+    private static final String WEEKDAY_DISCOUNT_MESSAGE = "평일 할인: ";
+    private static final String SPECIAL_DAY_DISCOUNT_MESSAGE = "특별 할인: ";
+    private static final String PRESENTATION_DISCOUNT_MESSAGE = "증정 이벤트: ";
     private static final String TOTAL_DISCOUNT_MESSAGE = "<총혜택 금액>";
     private static final String EVENT_BADGE_MESSAGE = "<12월 이벤트 배지>";
     private static final String BENEFIT_APPLIED_AMOUNT_MESSAGE = "<할인 후 예상 결제 금액>";
@@ -68,25 +68,25 @@ public class OutputView {
             System.out.println();
             return;
         }
-        System.out.println(PRESENTATION_NONE_MESSAGE);
+        System.out.println(NONE_MESSAGE);
         System.out.println();
     }
 
     public static void printBenefitStatus(int totalDiscountAmount) {
         System.out.println(BENEFIT_MESSAGE);
-        if (totalDiscountAmount == 0){
-            System.out.println("없음");
+        if (totalDiscountAmount == 0) {
+            System.out.println(NONE_MESSAGE);
         }
     }
 
-    public static void printChristmasDdayDiscount(int discountAmount) {
-        if (discountAmount > MIN_DISCOUNT_AMOUNT) {
+    public static void printChristmasDdayDiscount(int discountAmount, int totalDiscountAmount) {
+        if (discountAmount > MIN_DISCOUNT_AMOUNT && totalDiscountAmount > MIN_DISCOUNT_AMOUNT) {
             System.out.println(D_DAY_BENEFIT_MESSAGE + MINUS_MESSAGE + discountAmount + WON_MESSAGE);
         }
     }
 
-    public static void printWeekdayWeekendDiscount(int discountAmount, boolean isWeekend) {
-        if (discountAmount > MIN_DISCOUNT_AMOUNT) {
+    public static void printWeekdayWeekendDiscount(int discountAmount, boolean isWeekend, int totalDiscountAmount) {
+        if (discountAmount > MIN_DISCOUNT_AMOUNT && totalDiscountAmount > MIN_DISCOUNT_AMOUNT) {
             if (isWeekend == false) {
                 System.out.println(WEEKDAY_DISCOUNT_MESSAGE + ": " + MINUS_MESSAGE + discountAmount + WON_MESSAGE);
                 return;
@@ -95,15 +95,15 @@ public class OutputView {
         }
     }
 
-    public static void printSpecialDayDiscount(int discountAmount) {
-        if (discountAmount > MIN_DISCOUNT_AMOUNT) {
-            System.out.println(SPECIALDAY_DISCOUNT_MESSAGE + ": " + MINUS_MESSAGE + discountAmount + WON_MESSAGE);
+    public static void printSpecialDayDiscount(int discountAmount, int totalDiscountAmount) {
+        if (discountAmount > MIN_DISCOUNT_AMOUNT && totalDiscountAmount > MIN_DISCOUNT_AMOUNT) {
+            System.out.println(SPECIAL_DAY_DISCOUNT_MESSAGE + MINUS_MESSAGE + discountAmount + WON_MESSAGE);
         }
     }
 
-    public static void printPresentationDiscount(int discountAmount) {
-        if (discountAmount > MIN_DISCOUNT_AMOUNT) {
-            System.out.println(PRESENTATION_DISCOUNT_MESSAGE + ": " + MINUS_MESSAGE + discountAmount + WON_MESSAGE);
+    public static void printPresentationDiscount(int discountAmount, int totalDiscountAmount) {
+        if (discountAmount > MIN_DISCOUNT_AMOUNT && totalDiscountAmount > MIN_DISCOUNT_AMOUNT) {
+            System.out.println(PRESENTATION_DISCOUNT_MESSAGE + MINUS_MESSAGE + discountAmount + WON_MESSAGE);
         }
     }
 

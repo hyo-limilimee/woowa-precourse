@@ -64,17 +64,18 @@ public class EventPlanner {
         boolean specialDayStatus = VisitingDate.isSpecialDay(visitingDate);
         int totalDiscount = Benefit.calculateTotalDiscount(orderList, visitingDate, specialDayStatus,
                 presentationStatus, totalPrice);
-        int benefitAppliedAmount = totalPrice - totalDiscount;
+        int benefitAppliedAmount = Benefit.calculateFinalAmount(orderList, visitingDate, specialDayStatus, totalPrice);
 
         OutputView.printTotalPrice(totalPrice);
         OutputView.printPresentationStatus(presentationStatus);
         OutputView.printBenefitStatus(totalDiscount);
-        OutputView.printChristmasDdayDiscount(Benefit.chiristmasDdayDiscount(visitingDate),totalDiscount);
-        OutputView.printWeekdayWeekendDiscount(weekdayWeekendDiscountAmount, VisitingDate.isWeekend(visitingDate),totalDiscount);
-        OutputView.printSpecialDayDiscount(Benefit.calculateSpecialDaysDiscount(specialDayStatus),totalDiscount);
-        OutputView.printPresentationDiscount(Benefit.calculatePresentationDiscount(presentationStatus),totalDiscount);
+        OutputView.printChristmasDdayDiscount(Benefit.chiristmasDdayDiscount(visitingDate), totalDiscount);
+        OutputView.printWeekdayWeekendDiscount(weekdayWeekendDiscountAmount, VisitingDate.isWeekend(visitingDate),
+                totalDiscount);
+        OutputView.printSpecialDayDiscount(Benefit.calculateSpecialDaysDiscount(specialDayStatus), totalDiscount);
+        OutputView.printPresentationDiscount(Benefit.calculatePresentationDiscount(presentationStatus), totalDiscount);
         OutputView.printTotalDiscount(totalDiscount);
-        OutputView.printEventBadge(Benefit.evaluateEventBadge(totalDiscount));
         OutputView.printBenefitAppliedAmount(benefitAppliedAmount);
+        OutputView.printEventBadge(Benefit.evaluateEventBadge(totalDiscount));
     }
 }

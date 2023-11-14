@@ -95,15 +95,30 @@ public class Benefit {
         int totalDiscountAmount = 0;
         boolean eventAppliedCase = CheckEventPossibility.isPossibleApplyEvents(totalPrice, orderList);
 
-        totalDiscountAmount += chiristmasDdayDiscount(visitingDate);
-        totalDiscountAmount += weekDaysWeekendsDiscount(orderList, visitingDate);
-        totalDiscountAmount += calculateSpecialDaysDiscount(isSpecialDay);
-        totalDiscountAmount += calculatePresentationDiscount(isPresentation);
+        totalDiscountAmount = chiristmasDdayDiscount(visitingDate) +
+                +weekDaysWeekendsDiscount(orderList, visitingDate)
+                + calculateSpecialDaysDiscount(isSpecialDay)
+                + calculatePresentationDiscount(isPresentation);
 
-        if (eventAppliedCase == false) {
+        if (eventAppliedCase == true) {
             totalDiscountAmount = 0;
         }
         return totalDiscountAmount;
+    }
+
+    public static int calculateFinalAmount(List<OrderedList> orderList, int visitingDate, boolean isSpecialDay, int totalPrice ){
+        int totalDiscountAmount = 0;
+        boolean eventAppliedCase = CheckEventPossibility.isPossibleApplyEvents(totalPrice, orderList);
+        totalDiscountAmount = chiristmasDdayDiscount(visitingDate) +
+                +weekDaysWeekendsDiscount(orderList, visitingDate)
+                + calculateSpecialDaysDiscount(isSpecialDay);
+
+        if (eventAppliedCase == true) {
+            totalDiscountAmount = 0;
+        }
+        int finalAmount = totalPrice - totalDiscountAmount;
+
+        return finalAmount;
     }
 
     public static String evaluateEventBadge(int totalDiscountAmount) {

@@ -20,7 +20,6 @@ public class OutputView {
     private static final String BENEFIT_MESSAGE = "<혜택 내역>";
     private static final int MIN_DISCOUNT_AMOUNT = 0;
     private static final String D_DAY_BENEFIT_MESSAGE = "크리스마스 디데이 할인: ";
-    private static final String MINUS_MESSAGE = "-";
     private static final String WEEKEND_DISCOUNT_MESSAGE = "주말 할인: ";
     private static final String WEEKDAY_DISCOUNT_MESSAGE = "평일 할인: ";
     private static final String SPECIAL_DAY_DISCOUNT_MESSAGE = "특별 할인: ";
@@ -81,36 +80,46 @@ public class OutputView {
 
     public static void printChristmasDdayDiscount(int discountAmount, int totalDiscountAmount) {
         if (discountAmount > MIN_DISCOUNT_AMOUNT && totalDiscountAmount > MIN_DISCOUNT_AMOUNT) {
-            System.out.println(D_DAY_BENEFIT_MESSAGE + MINUS_MESSAGE + discountAmount + WON_MESSAGE);
+            NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.KOREA);
+            String formattedAmount = numberFormat.format(-discountAmount);
+            System.out.println(D_DAY_BENEFIT_MESSAGE + formattedAmount + WON_MESSAGE);
         }
     }
 
     public static void printWeekdayWeekendDiscount(int discountAmount, boolean isWeekend, int totalDiscountAmount) {
         if (discountAmount > MIN_DISCOUNT_AMOUNT && totalDiscountAmount > MIN_DISCOUNT_AMOUNT) {
-            if (isWeekend == false) {
-                System.out.println(WEEKDAY_DISCOUNT_MESSAGE + ": " + MINUS_MESSAGE + discountAmount + WON_MESSAGE);
+            NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.KOREA);
+            String formattedAmount = numberFormat.format(-discountAmount);
+            if (!isWeekend) {
+                System.out.println(WEEKDAY_DISCOUNT_MESSAGE + formattedAmount + WON_MESSAGE);
                 return;
             }
-            System.out.println(WEEKEND_DISCOUNT_MESSAGE + ": " + MINUS_MESSAGE + discountAmount + WON_MESSAGE);
+            System.out.println(WEEKEND_DISCOUNT_MESSAGE + formattedAmount + WON_MESSAGE);
         }
     }
 
     public static void printSpecialDayDiscount(int discountAmount, int totalDiscountAmount) {
         if (discountAmount > MIN_DISCOUNT_AMOUNT && totalDiscountAmount > MIN_DISCOUNT_AMOUNT) {
-            System.out.println(SPECIAL_DAY_DISCOUNT_MESSAGE + MINUS_MESSAGE + discountAmount + WON_MESSAGE);
+            NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.KOREA);
+            String formattedAmount = numberFormat.format(-discountAmount);
+            System.out.println(SPECIAL_DAY_DISCOUNT_MESSAGE + formattedAmount + WON_MESSAGE);
         }
     }
 
     public static void printPresentationDiscount(int discountAmount, int totalDiscountAmount) {
         if (discountAmount > MIN_DISCOUNT_AMOUNT && totalDiscountAmount > MIN_DISCOUNT_AMOUNT) {
-            System.out.println(PRESENTATION_DISCOUNT_MESSAGE + MINUS_MESSAGE + discountAmount + WON_MESSAGE);
+            NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.KOREA);
+            String formattedAmount = numberFormat.format(-discountAmount);
+            System.out.println(PRESENTATION_DISCOUNT_MESSAGE + formattedAmount + WON_MESSAGE);
         }
     }
 
     public static void printTotalDiscount(int discountAmount) {
         System.out.println();
         System.out.println(TOTAL_DISCOUNT_MESSAGE);
-        System.out.println(discountAmount + WON_MESSAGE);
+        NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.KOREA);
+        String formattedAmount = numberFormat.format(-discountAmount);
+        System.out.println(formattedAmount + WON_MESSAGE);
     }
 
     public static void printEventBadge(String badgeName) {
@@ -120,8 +129,11 @@ public class OutputView {
     }
 
     public static void printBenefitAppliedAmount(int amount) {
+        NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.KOREA);
+        String formattedAmount = numberFormat.format(amount);
+
         System.out.println();
         System.out.println(BENEFIT_APPLIED_AMOUNT_MESSAGE);
-        System.out.println(amount + WON_MESSAGE);
+        System.out.println(formattedAmount + WON_MESSAGE);
     }
 }

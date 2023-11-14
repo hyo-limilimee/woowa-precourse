@@ -17,7 +17,8 @@ public class Benefit {
                     MINIMUM_D_DAY_DISCOUNT_AMOUNT + (visitingDate - FIRST_DATE) * WEIGHT_D_DAY_DISCOUNT_AMOUNT;
             return discountAmount;
         }
-        return 0;
+        int discountAmount = 0;
+        return discountAmount;
     }
 
     public static int weekDaysWeekendsDiscount(List<OrderedList> orderList, int visitingDate) {

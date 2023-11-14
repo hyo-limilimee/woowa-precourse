@@ -22,31 +22,40 @@ public class Benefit {
     }
 
     public static int weekDaysWeekendsDiscount(List<OrderedList> orderList, int visitingDate) {
-        int itemCount = 0;
+        int mainItemCountWeekdays = countMainItems(orderList, visitingDate);
+        int dessertItemCountWeekends = countDessertItems(orderList, visitingDate);
+
+        return calculateWeekDaysWeekendDiscount(mainItemCountWeekdays, dessertItemCountWeekends, WEEKDAYS_WEEKENDS_DISCOUNT_AMOUNT);
+    }
+
+    private static int countMainItems(List<OrderedList> orderList, int visitingDate) {
+        int mainItemCountWeekdays = 0;
 
         for (OrderedList orderedItem : orderList) {
             Menu menu = orderedItem.getMenu();
 
-            if (VisitingDate.isWeekend(visitingDate)) {
-                itemCount = countItems(menu, itemCount, "main");
+            if (VisitingDate.isWeekend(visitingDate) && "main".equals(menu.getMenuType())) {
+                mainItemCountWeekdays += orderedItem.menuQuantity;
             }
-            itemCount = countItems(menu, itemCount, "dessert");
         }
-
-        int discountAmount = calculateWeekDaysWeekendDiscount(itemCount, WEEKDAYS_WEEKENDS_DISCOUNT_AMOUNT);
-
-        return discountAmount;
+        return mainItemCountWeekdays;
     }
 
-    private static int countItems(Menu menu, int itemCount, String itemType) {
-        if (itemType.equals(menu.getMenuType())) {
-            itemCount++;
+    private static int countDessertItems(List<OrderedList> orderList, int visitingDate) {
+        int dessertItemCountWeekends = 0;
+
+        for (OrderedList orderedItem : orderList) {
+            Menu menu = orderedItem.getMenu();
+
+            if (!VisitingDate.isWeekend(visitingDate) && "dessert".equals(menu.getMenuType())) {
+                dessertItemCountWeekends += orderedItem.menuQuantity;
+            }
         }
-        return itemCount;
+        return dessertItemCountWeekends;
     }
 
-    private static int calculateWeekDaysWeekendDiscount(int itemCount, int discountAmountPerItem) {
-        return itemCount * WEEKDAYS_WEEKENDS_DISCOUNT_AMOUNT;
+    private static int calculateWeekDaysWeekendDiscount(int mainItemCountWeekdays, int dessertItemCountWeekends, int discountAmountPerItem) {
+        return (mainItemCountWeekdays * discountAmountPerItem) + (dessertItemCountWeekends * discountAmountPerItem);
     }
 
     public static int calculateSpecialDaysDiscount(boolean isSpecialDay) {

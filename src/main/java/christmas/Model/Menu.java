@@ -14,13 +14,25 @@ public enum Menu {
     RED_WINE("레드와인", 60_000, "drink"),
     CHAMPAGNE("샴페인", 25_000, "drink");
 
-    public String menuName;
-    public int menuPrice;
-    public String menuType;
+    private final String menuName;
+    private final int menuPrice;
+    private final String menuType;
 
     Menu(String menuName, int menuPrice, String menuType) {
         this.menuName = menuName;
         this.menuPrice = menuPrice;
         this.menuType = menuType;
+    }
+
+    public String getMenuName() {
+        return menuName;
+    }
+
+    public int getMenuPrice() {
+        return menuPrice;
+    }
+
+    public String getMenuType() {
+        return menuType;
     }
 }

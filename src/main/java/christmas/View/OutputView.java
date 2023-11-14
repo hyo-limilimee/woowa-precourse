@@ -108,16 +108,19 @@ public class OutputView {
     }
 
     public static void printTotalDiscount(int discountAmount) {
+        System.out.println();
         System.out.println(TOTAL_DISCOUNT_MESSAGE);
         System.out.println(discountAmount + WON_MESSAGE);
     }
 
     public static void printEventBadge(String badgeName) {
+        System.out.println();
         System.out.println(EVENT_BADGE_MESSAGE);
         System.out.println(badgeName);
     }
 
     public static void printBenefitAppliedAmount(int amount) {
+        System.out.println();
         System.out.println(BENEFIT_APPLIED_AMOUNT_MESSAGE);
         System.out.println(amount + WON_MESSAGE);
     }

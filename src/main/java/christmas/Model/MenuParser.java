@@ -10,19 +10,20 @@ public class MenuParser {
         String[] menuOrders = menuInput.split(",");
 
         for (String menuOrder : menuOrders) {
-            processMenuOrder(menuOrder, orderList);
+            processMenuOrder(menuOrder.trim(), orderList);
         }
+
         return orderList;
     }
 
     private static void processMenuOrder(String menuOrder, List<OrderedList> orderList) {
         OrderedList.validateFormMenu(menuOrder);
 
-        String[] menuNameAndQuantity = menuOrder.trim().split("-");
+        String[] menuNameAndQuantity = menuOrder.split("-");
 
         if (menuNameAndQuantity.length == 2) {
-            String menuName = menuNameAndQuantity[0];
-            String quantityStr = menuNameAndQuantity[1];
+            String menuName = menuNameAndQuantity[0].trim();
+            String quantityStr = menuNameAndQuantity[1].trim();
 
             processMenuDetails(menuName, quantityStr, orderList);
         }

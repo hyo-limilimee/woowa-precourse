@@ -72,7 +72,8 @@ public class Benefit {
     }
 
     private static int calculateWeekDaysWeekendDiscount(int mainItemCountWeekdays, int dessertItemCountWeekends) {
-        return (mainItemCountWeekdays * WEEKDAYS_WEEKENDS_DISCOUNT_AMOUNT) + (dessertItemCountWeekends * WEEKDAYS_WEEKENDS_DISCOUNT_AMOUNT);
+        return (mainItemCountWeekdays * WEEKDAYS_WEEKENDS_DISCOUNT_AMOUNT) + (dessertItemCountWeekends
+                * WEEKDAYS_WEEKENDS_DISCOUNT_AMOUNT);
     }
 
     public static int calculateSpecialDaysDiscount(boolean isSpecialDay) {
@@ -92,7 +93,6 @@ public class Benefit {
     public static int calculateTotalDiscount(List<OrderedList> orderList, int visitingDate, boolean isSpecialDay,
                                              boolean isPresentation, int totalPrice) {
         int totalDiscountAmount = 0;
-
         boolean eventAppliedCase = CheckEventPossibility.isPossibleApplyEvents(totalPrice, orderList);
 
         totalDiscountAmount += chiristmasDdayDiscount(visitingDate);
@@ -103,7 +103,6 @@ public class Benefit {
         if (eventAppliedCase == false) {
             totalDiscountAmount = 0;
         }
-
         return totalDiscountAmount;
     }
 

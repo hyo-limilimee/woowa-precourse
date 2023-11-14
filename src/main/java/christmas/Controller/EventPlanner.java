@@ -2,6 +2,7 @@ package christmas.Controller;
 
 import christmas.Model.Benefit;
 import christmas.Model.MenuParser;
+import christmas.Model.MenuPriceCalculator;
 import christmas.Model.OrderedList;
 import christmas.Model.VisitingDate;
 import christmas.View.InputView;
@@ -57,8 +58,8 @@ public class EventPlanner {
         printVisitingInformation(visitingDate);
         printOrderInformation(orderList);
 
-        int totalPrice = OrderedList.calculateTotalPrice(orderList);
-        boolean presentationStatus = OrderedList.isPresent(totalPrice);
+        int totalPrice = MenuPriceCalculator.calculateTotalPrice(orderList);
+        boolean presentationStatus = MenuPriceCalculator.isPresent(totalPrice);
         int weekdayWeekendDiscountAmount = Benefit.weekDaysWeekendsDiscount(orderList, visitingDate);
         boolean specialDayStatus = VisitingDate.isSpecialDay(visitingDate);
         int totalDiscount = Benefit.calculateTotalDiscount(orderList, visitingDate, specialDayStatus,

@@ -2,6 +2,7 @@ package christmas.Model;
 
 import christmas.View.ErrorMessages;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class VisitingDate {
@@ -9,11 +10,8 @@ public class VisitingDate {
     private final static int MIN_DATE_NUMBER = 1;
     private final static int MAX_DATE_NUMBER = 31;
 
-    private static final List<Integer> weekendDays = Arrays.asList(
-            1, 2, 8, 9, 15, 16, 22, 23, 29, 30
-    );
-    private static final List<Integer> specialDays = Arrays.asList(
-            3, 10, 17, 24, 25, 31);
+    private static final List<Integer> weekendDays = Collections.unmodifiableList(Arrays.asList(1, 2, 8, 9, 15, 16, 22, 23, 29, 30));
+    private static final List<Integer> specialDays = Collections.unmodifiableList(Arrays.asList(3, 10, 17, 24, 25, 31));
 
     public VisitingDate(String dateInput) {
         int dateInputNum = validateIsNumeric(dateInput);
@@ -26,17 +24,11 @@ public class VisitingDate {
     }
 
     public static boolean isWeekend(int visitingDate) {
-        if (weekendDays.contains(visitingDate)) {
-            return true;
-        }
-        return false;
+        return weekendDays.contains(visitingDate);
     }
 
     public static boolean isSpecialDay(int visitingDate) {
-        if (specialDays.contains(visitingDate)) {
-            return true;
-        }
-        return false;
+        return specialDays.contains(visitingDate);
     }
 
     private static int validateIsNumeric(String dateInput) throws IllegalArgumentException {

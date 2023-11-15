@@ -64,15 +64,38 @@
 --------------------------------------------------------
 ## 디렉토리 구조
 
-
-
-
-
-
-
-
-
-
++---main
+|   \---java
+|       \---christmas
+|           |   Application.java
+|           |
+|           +---Controller
+|           |       EventPlanner.java
+|           |
+|           +---Model
+|           |       Benefit.java
+|           |       CheckEventPossibility.java
+|           |       Menu.java
+|           |       MenuParser.java
+|           |       MenuPriceCalculator.java
+|           |       OrderedList.java
+|           |       VisitingDate.java
+|           |
+|           \---View
+|                   ErrorMessages.java
+|                   InputView.java
+|                   OutputView.java
+|
+\---test
+\---java
+\---christmas
+ApplicationTest.java
+BenefitTest.java
+MenuParserTest.java
+MenuPriceCalculatorTest.java
+MenuTest.java
+OrderedListTest.java
+VisitingDateTest.java
 
 ----------------------------------------------------------------
 # 미션 - 크리스마스 프로모션

@@ -123,11 +123,11 @@ public class Benefit {
     }
 
     public static String evaluateEventBadge(int totalDiscountAmount) {
-        if (totalDiscountAmount > TOTAL_DISCOUNT_AMOUNT_TWENTY_THOUSANDS) {
+        if (totalDiscountAmount >= TOTAL_DISCOUNT_AMOUNT_TWENTY_THOUSANDS) {
             return SANTA_MESSAGE;
-        } else if (totalDiscountAmount > TOTAL_DISCOUNT_AMOUNT_TEN_THOUSANDS) {
+        } else if (totalDiscountAmount >= TOTAL_DISCOUNT_AMOUNT_TEN_THOUSANDS) {
             return TREE_MESSAGE;
-        } else if (totalDiscountAmount > TOTAL_DISCOUNT_AMOUNT_FIVE_THOUSANDS) {
+        } else if (totalDiscountAmount >=TOTAL_DISCOUNT_AMOUNT_FIVE_THOUSANDS) {
             return STAR_MESSAGE;
         }
         return NONE_MESSAGE;

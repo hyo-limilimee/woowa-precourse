@@ -21,8 +21,6 @@ public class OrderedList {
 
     public OrderedList(List<Map<String, Integer>> orderList) {
 
-//        validateDuplicatedMenus(orderList);
-
         Map<String, Integer> firstOrder = orderList.get(0);
         this.menuName = firstOrder.keySet().iterator().next();
         this.menuQuantity = firstOrder.get(this.menuName);

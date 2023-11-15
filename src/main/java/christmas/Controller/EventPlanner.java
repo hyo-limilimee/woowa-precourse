@@ -11,6 +11,7 @@ import java.util.List;
 
 public class EventPlanner {
     private VisitingDate visitingDate;
+    private static List<OrderedList> orderList;
 
     public EventPlanner() {
     }
@@ -34,9 +35,15 @@ public class EventPlanner {
     }
 
     public List<OrderedList> inputMenu() {
+        List<OrderedList> orderList = null;
+
         try {
+
             String menuInput = InputView.readMenu();
-            List<OrderedList> orderList = MenuParser.parseMenuInput(menuInput);
+            orderList = MenuParser.parseMenuInput(menuInput);
+            OrderedList.validateSatisfyConditions(orderList);
+
+            System.out.println(orderList);
 
             return orderList;
 

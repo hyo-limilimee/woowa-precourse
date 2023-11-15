@@ -39,7 +39,11 @@ public class MenuParser {
 
         Map<String, Integer> menuDetails = new HashMap<>();
         menuDetails.put(menuName, quantity);
-        OrderedList orderedItem = new OrderedList(Collections.singletonList(menuDetails));
+        List<Map<String, Integer>> orderDetailsList = Collections.singletonList(menuDetails);
+
+        OrderedList.validateDuplicatedMenus(orderDetailsList);
+
+        OrderedList orderedItem = new OrderedList(orderDetailsList);
         orderList.add(orderedItem);
     }
 }

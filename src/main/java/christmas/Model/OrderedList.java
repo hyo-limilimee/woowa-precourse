@@ -9,6 +9,7 @@ import java.util.Set;
 public class OrderedList {
     public final String menuName;
     public final int menuQuantity;
+    private static Set<String> existingMenus = new HashSet<>();
     private static final int MIN_ORDER_QUANTITY = 1;
     private static final String MENU_INPUT_FORM = "[가-힣\\s]+-\\d+";
     private static final String RESTRICTION_CONDITION_ONLY_DRINK = "drink";
@@ -20,13 +21,12 @@ public class OrderedList {
 
     public OrderedList(List<Map<String, Integer>> orderList) {
 
-        validateDuplicatedMenus(orderList);
+//        validateDuplicatedMenus(orderList);
 
         Map<String, Integer> firstOrder = orderList.get(0);
         this.menuName = firstOrder.keySet().iterator().next();
         this.menuQuantity = firstOrder.get(this.menuName);
     }
-
 
     public Menu getMenu() {
         for (Menu menu : Menu.values()) {
@@ -41,12 +41,9 @@ public class OrderedList {
         return menuQuantity;
     }
 
-    private static Set<String> existingMenus = new HashSet<>();
-
-    private static void validateDuplicatedMenus(List<Map<String, Integer>> orderList) {
+    public static void validateDuplicatedMenus(List<Map<String, Integer>> orderList) {
         for (Map<String, Integer> order : orderList) {
             for (String menuName : order.keySet()) {
-
                 if (existingMenus.contains(menuName)) {
                     ErrorMessages.menuInputError();
                     throw new IllegalArgumentException();
@@ -55,7 +52,6 @@ public class OrderedList {
             }
         }
     }
-
 
     public static void validateIsRightMenu(String menuName) {
         for (Menu menu : Menu.values()) {
@@ -93,10 +89,10 @@ public class OrderedList {
     public static void validateSatisfyConditions(List<OrderedList> orderList) {
         if (isContainsOnlyBeverages(orderList) == false) {
             ErrorMessages.menuInputError();
-            throw new IllegalArgumentException("음료만 주문할 수 없습니다.");
+            throw new IllegalArgumentException();
         } else if (isMenuItemsCountEligible(orderList) == false) {
             ErrorMessages.menuInputError();
-            throw new IllegalArgumentException("주문은 최대 20개까지만 가능합니다.");
+            throw new IllegalArgumentException();
         }
     }
 

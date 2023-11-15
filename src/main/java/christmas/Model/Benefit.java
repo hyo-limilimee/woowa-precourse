@@ -100,7 +100,7 @@ public class Benefit {
                 + calculateSpecialDaysDiscount(isSpecialDay)
                 + calculatePresentationDiscount(isPresentation);
 
-        if (eventAppliedCase == true) {
+        if (eventAppliedCase == false) {
             totalDiscountAmount = 0;
         }
         return totalDiscountAmount;
@@ -113,9 +113,10 @@ public class Benefit {
                 +weekDaysWeekendsDiscount(orderList, visitingDate)
                 + calculateSpecialDaysDiscount(isSpecialDay);
 
-        if (eventAppliedCase == true) {
+        if (eventAppliedCase == false) {
             totalDiscountAmount = 0;
         }
+
         int finalAmount = totalPrice - totalDiscountAmount;
 
         return finalAmount;

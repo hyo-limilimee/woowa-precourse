@@ -15,6 +15,7 @@ public class OrderedList {
     public static void resetExistingMenus() {
         existingMenus.clear();
     }
+
     public OrderedList(List<Map<String, Integer>> orderList) {
 
         validateDuplicatedMenus(orderList);
@@ -31,6 +32,10 @@ public class OrderedList {
             }
         }
         throw new IllegalStateException();
+    }
+
+    public int getQuantity() {
+        return menuQuantity;
     }
 
     private static Set<String> existingMenus = new HashSet<>();

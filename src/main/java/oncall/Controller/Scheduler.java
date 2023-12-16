@@ -17,7 +17,7 @@ public class Scheduler {
     public void run() {
         startingDay = inputStartingDate();
         weekdayTurnList = inputWeekdayTurns();
-        holidayTurnList = inputWeekdayTurns();
+        holidayTurnList = inputHolidayTurns();
 
         System.out.println("Start Month: " + startingDay.getStartMonth() +
                 ", Start Weekday: " + startingDay.getStartWeekday());

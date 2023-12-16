@@ -13,6 +13,11 @@ public class WeekDayTurn {
         Set<String> uniqueNicknames = new HashSet<>();  // To check for duplicates
         String[] weekdayTurns = weekdayTurnInput.split(",");
 
+        if (weekdayTurns.length < 5 || weekdayTurns.length > 35) {
+            ErrorMessages.nicknameCountError();
+            throw new IllegalArgumentException();
+        }
+
         for (String weekdayTurn : weekdayTurns) {
             String trimmedTurn = weekdayTurn.trim();
             if (!trimmedTurn.isEmpty() && validateNickName(trimmedTurn)) {

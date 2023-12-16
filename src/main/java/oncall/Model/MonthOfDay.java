@@ -18,7 +18,12 @@ public class MonthOfDay {
     private void addWeekendsToList() {
         String[] daysOfWeek = {"월", "화", "수", "목", "금", "토", "일"};
 
-        for (int i = 1; i <= 31; i++) { // 한 달은 최대 31일까지 있다고 가정
+        // 각 월의 일 수를 저장하는 배열
+        int[] daysInMonth = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+
+        int daysInCurrentMonth = daysInMonth[startingDay.getStartMonth()];
+
+        for (int i = 1; i <= daysInCurrentMonth; i++) {
             String dateKey = startingDay.getStartMonth() + "-" + i;
             String weekday = daysOfWeek[(i - 1) % 7];
 
@@ -35,6 +40,11 @@ public class MonthOfDay {
 
         String[] daysOfWeek = {"월", "화", "수", "목", "금", "토", "일"};
 
+        // 각 월의 일 수를 저장하는 배열
+        int[] daysInMonth = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+
+        int daysInCurrentMonth = daysInMonth[startingDay.getStartMonth()];
+
         // daysOfWeek에서 시작 요일의 인덱스 찾기
         int startIndex = 0;
         for (int i = 0; i < daysOfWeek.length; i++) {
@@ -45,7 +55,7 @@ public class MonthOfDay {
         }
 
         // 주어진 월의 요일 할당
-        for (int i = 1; i <= 31; i++) { // 한 달은 최대 31일까지 있다고 가정
+        for (int i = 1; i <= daysInCurrentMonth; i++) {
             String weekday = daysOfWeek[(startIndex + i - 1) % 7];
             weekdaysMap.put(i, weekday);
 

@@ -1,30 +1,30 @@
 package oncall.Controller;
 
-import java.util.List;
 import oncall.Model.StartingDateParser;
 import oncall.Model.StartingDay;
 import oncall.View.InputView;
 
 public class Scheduler {
-    private List<StartingDay> startingDayList;
+    private StartingDay startingDay;
 
     public Scheduler() {
     }
 
     public void run() {
-        startingDayList = inputStartingDate();
+        startingDay = inputStartingDate();
 
-        for (StartingDay startingDay : startingDayList) {
-            System.out.println("Start Month: " + startingDay.getStartMonth() +
-                    ", Start Weekday: " + startingDay.getStartWeekday());
-        }
+        System.out.println("Start Month: " + startingDay.getStartMonth() +
+                ", Start Weekday: " + startingDay.getStartWeekday());
     }
 
-    public List<StartingDay> inputStartingDate() {
+    public StartingDay inputStartingDate() {
+        StartingDay day;
+
         try {
-            return StartingDateParser.parseStartingDayInput(InputView.readStartDate());
+            day = StartingDateParser.parseStartingDayInput(InputView.readStartDate());
+            return day;
         } catch (IllegalArgumentException e) {
-            System.out.println("Error: " + e.getMessage());
+            System.out.println("Invalid input. Please try again."); // Add a message for the user
             return inputStartingDate();
         }
     }

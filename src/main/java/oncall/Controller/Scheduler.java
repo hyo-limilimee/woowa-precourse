@@ -1,12 +1,13 @@
 package oncall.Controller;
 
-import java.util.List;
-import java.util.Map;
 import oncall.Model.MonthOfDay;
-import oncall.Model.StartingDateParser;
 import oncall.Model.StartingDay;
+import oncall.Model.StartingDateParser;
 import oncall.Model.WeekDayTurn;
 import oncall.View.InputView;
+
+import java.util.List;
+import java.util.Map;
 
 public class Scheduler {
     private StartingDay startingDay;
@@ -28,12 +29,11 @@ public class Scheduler {
 
         System.out.println("Holiday Turns: " + holidayTurnList);
 
+        // MonthOfDay 생성
         MonthOfDay monthOfDay = new MonthOfDay(startingDay);
 
+        // calculateWeekdays 메소드 호출
         Map<Integer, String> weekdaysMap = monthOfDay.calculateWeekdays();
-        for (Map.Entry<Integer, String> entry : weekdaysMap.entrySet()) {
-            System.out.println(entry.getKey() + "일: " + entry.getValue());
-        }
     }
 
     public StartingDay inputStartingDate() {

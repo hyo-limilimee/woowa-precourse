@@ -35,19 +35,20 @@ public class WeekDayTurn {
         }
     }
 
-    private static void validateAndAddNickname(String nickname, Set<String> uniqueNicknames, List<String> weekdayTurnList) {
-        if (!nickname.isEmpty() && validateNickName(nickname)) {
-            if (uniqueNicknames.contains(nickname)) {
-                ErrorMessages.nicknameDuplicateError();
-                throw new IllegalArgumentException();
-            } else {
-                weekdayTurnList.add(nickname);
-                uniqueNicknames.add(nickname);
-            }
-        } else {
+    private static void validateAndAddNickname(String nickname, Set<String> uniqueNicknames,
+                                               List<String> weekdayTurnList) {
+        if (nickname.isEmpty() || !validateNickName(nickname)) {
             ErrorMessages.nicknameLengthError();
             throw new IllegalArgumentException();
         }
+
+        if (uniqueNicknames.contains(nickname)) {
+            ErrorMessages.nicknameDuplicateError();
+            throw new IllegalArgumentException();
+        }
+
+        weekdayTurnList.add(nickname);
+        uniqueNicknames.add(nickname);
     }
 
     public static boolean validateNickName(String nickname) {

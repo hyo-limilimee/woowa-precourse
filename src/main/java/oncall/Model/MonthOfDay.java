@@ -65,7 +65,17 @@ public class MonthOfDay {
             }
         }
 
-        System.out.print("주말 리스트: " + weekends);
+        // 전체 요일 출력
+        System.out.println("한 달 동안의 요일:");
+        for (Map.Entry<Integer, String> entry : weekdaysMap.entrySet()) {
+            System.out.println(entry.getKey() + "일: " + entry.getValue());
+        }
+
+        // isWeekend 결과 출력
+        System.out.println("isWeekend 결과:");
+        for (int i = 1; i <= daysInCurrentMonth; i++) {
+            System.out.println(i + "일: " + isWeekend(i));
+        }
 
         return weekdaysMap;
     }

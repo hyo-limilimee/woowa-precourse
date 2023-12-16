@@ -22,13 +22,6 @@ public class Scheduler {
         weekdayTurnList = inputWeekdayTurns();
         holidayTurnList = inputHolidayTurns();
 
-        System.out.println("Start Month: " + startingDay.getStartMonth() +
-                ", Start Weekday: " + startingDay.getStartWeekday());
-
-        System.out.println("Weekday Turns: " + weekdayTurnList);
-
-        System.out.println("Holiday Turns: " + holidayTurnList);
-
         // MonthOfDay 생성
         MonthOfDay monthOfDay = new MonthOfDay(startingDay);
 

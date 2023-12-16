@@ -67,8 +67,8 @@ public class MonthOfDay {
     public void assignTurns(List<String> weekdayTurnList, List<String> holidayTurnList) {
         Map<Integer, String> weekdaysMap = calculateWeekdays();
 
-        int holidayAssignedIndex =0;
-        int weekdayAssignedIndex =0;
+        int holidayAssignedIndex = 0;
+        int weekdayAssignedIndex = 0;
 
         for (int i = 1; i <= weekdaysMap.size(); i++) {
             String dateKey = startingDay.getStartMonth() + "월 " + i + "일";
@@ -80,7 +80,19 @@ public class MonthOfDay {
                 int holidayIndex = holidayAssignedIndex % holidayTurnList.size();
                 assignedPerson = holidayTurnList.get(holidayIndex);
                 holidayAssignedIndex++; // 다음 배정된 사람을 위해 증가
-                System.out.printf("%s %s %s 휴일%n", dateKey, dayOfWeek, assignedPerson);
+
+                if ((startingDay.getStartMonth() == 1 && i == 1) ||
+                        (startingDay.getStartMonth() == 3 && i == 1) ||
+                        (startingDay.getStartMonth() == 5 && i == 5) ||
+                        (startingDay.getStartMonth() == 6 && i == 6) ||
+                        (startingDay.getStartMonth() == 8 && i == 15) ||
+                        (startingDay.getStartMonth() == 10 && i == 3) ||
+                        (startingDay.getStartMonth() == 10 && i == 9) ||
+                        (startingDay.getStartMonth() == 12 && i == 25)) {
+                    System.out.printf("%s %s (휴일) %s%n", dateKey, dayOfWeek, assignedPerson);
+                } else {
+                    System.out.printf("%s %s %s%n", dateKey, dayOfWeek, assignedPerson);
+                }
             } else {
                 // 주말 목록에 없는 경우, weekdayTurnList에서 배정
                 int weekdayIndex = weekdayAssignedIndex % weekdayTurnList.size();
@@ -90,6 +102,7 @@ public class MonthOfDay {
             }
         }
     }
+
 
 
     private boolean isWeekend(String dayOfWeek) {

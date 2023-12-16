@@ -23,7 +23,7 @@ public class MonthOfDay {
         int daysInCurrentMonth = daysInMonth[startingDay.getStartMonth()];
 
         for (int i = 1; i <= daysInCurrentMonth; i++) {
-            String dateKey = startingDay.getStartMonth() + "-" + i;
+            String dateKey = startingDay.getStartMonth() + "월 " + i + "일";
             String weekday = daysOfWeek[(i - 1) % 7];
 
             if (weekday.equals("토") || weekday.equals("일")) {
@@ -59,19 +59,24 @@ public class MonthOfDay {
         int daysInMonth = calculateWeekdays().size();
 
         for (int i = 1; i <= daysInMonth; i++) {
-            String dateKey = startingDay.getStartMonth() + "-" + i;
+            String dateKey = startingDay.getStartMonth() + "월 " + i + "일";
+            String dayOfWeek = calculateWeekdays().get(i);
+
+            String assignedPerson;
             if (isWeekend(i)) {
                 int holidayIndex = (i - 1) % holidayTurnList.size();
-                System.out.println(dateKey + ": " + holidayTurnList.get(holidayIndex) + " (Holiday)");
+                assignedPerson = holidayTurnList.get(holidayIndex);
             } else {
                 int weekdayIndex = (i - 1) % weekdayTurnList.size();
-                System.out.println(dateKey + ": " + weekdayTurnList.get(weekdayIndex));
+                assignedPerson = weekdayTurnList.get(weekdayIndex);
             }
+
+            System.out.printf("%s %s %s%n", dateKey, dayOfWeek, assignedPerson);
         }
     }
 
     private boolean isWeekend(int day) {
-        String dateKey = startingDay.getStartMonth() + "-" + day;
+        String dateKey = startingDay.getStartMonth() + "월 " + day + "일";
         return weekendList.contains(dateKey);
     }
 }

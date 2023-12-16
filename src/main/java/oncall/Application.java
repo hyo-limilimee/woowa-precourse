@@ -1,7 +1,10 @@
 package oncall;
 
+import oncall.Controller.Scheduler;
+
 public class Application {
     public static void main(String[] args) {
-        // TODO: 프로그램 구현
+        Scheduler scheduler = new Scheduler();
+        scheduler.run();
     }
 }

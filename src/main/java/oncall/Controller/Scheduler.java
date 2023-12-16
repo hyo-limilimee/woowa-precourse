@@ -1,20 +1,25 @@
 package oncall.Controller;
 
+import java.util.List;
 import oncall.Model.StartingDateParser;
 import oncall.Model.StartingDay;
+import oncall.Model.WeekDayTurn;
 import oncall.View.InputView;
 
 public class Scheduler {
     private StartingDay startingDay;
-
+    private List<String> weekdayTurnList;
     public Scheduler() {
     }
 
     public void run() {
         startingDay = inputStartingDate();
+        weekdayTurnList = inputWeekdayTurns();
 
         System.out.println("Start Month: " + startingDay.getStartMonth() +
                 ", Start Weekday: " + startingDay.getStartWeekday());
+
+        System.out.println("Weekday Turns: " + weekdayTurnList);
     }
 
     public StartingDay inputStartingDate() {
@@ -24,8 +29,16 @@ public class Scheduler {
             day = StartingDateParser.parseStartingDayInput(InputView.readStartDate());
             return day;
         } catch (IllegalArgumentException e) {
-            System.out.println("Invalid input. Please try again."); // Add a message for the user
             return inputStartingDate();
+        }
+    }
+
+    public List<String> inputWeekdayTurns() {
+        try {
+            String weekdayTurnInput = InputView.readWeekdayTurn();
+            return WeekDayTurn.parseTurnInput(weekdayTurnInput);
+        } catch (IllegalArgumentException e) {
+            return inputWeekdayTurns();
         }
     }
 }

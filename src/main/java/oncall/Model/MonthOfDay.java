@@ -41,7 +41,6 @@ public class MonthOfDay {
         }
     }
 
-
     public Map<Integer, String> calculateWeekdays() {
         Map<Integer, String> weekdaysMap = new HashMap<>();
 
@@ -68,24 +67,30 @@ public class MonthOfDay {
     public void assignTurns(List<String> weekdayTurnList, List<String> holidayTurnList) {
         Map<Integer, String> weekdaysMap = calculateWeekdays();
 
+        int holidayAssignedIndex =0;
+        int weekdayAssignedIndex =0;
+
         for (int i = 1; i <= weekdaysMap.size(); i++) {
             String dateKey = startingDay.getStartMonth() + "월 " + i + "일";
             String dayOfWeek = weekdaysMap.get(i);
 
             String assignedPerson;
-
             if (weekendList.contains(dateKey)) {
-                // Check if the date is in the weekendList
-                int holidayIndex = (i - 1) % holidayTurnList.size();
+                // 주말 목록에 있는 경우, holidayTurnList에서 배정
+                int holidayIndex = holidayAssignedIndex % holidayTurnList.size();
                 assignedPerson = holidayTurnList.get(holidayIndex);
+                holidayAssignedIndex++; // 다음 배정된 사람을 위해 증가
                 System.out.printf("%s %s %s 휴일%n", dateKey, dayOfWeek, assignedPerson);
             } else {
-                int weekdayIndex = (i - 1) % weekdayTurnList.size();
+                // 주말 목록에 없는 경우, weekdayTurnList에서 배정
+                int weekdayIndex = weekdayAssignedIndex % weekdayTurnList.size();
                 assignedPerson = weekdayTurnList.get(weekdayIndex);
+                weekdayAssignedIndex++; // 다음 배정된 사람을 위해 증가
                 System.out.printf("%s %s %s%n", dateKey, dayOfWeek, assignedPerson);
             }
         }
     }
+
 
     private boolean isWeekend(String dayOfWeek) {
         return dayOfWeek.equals("토") || dayOfWeek.equals("일");

@@ -14,7 +14,6 @@ public class MonthOfDay {
         this.weekendList = new ArrayList<>();
     }
 
-
     public Map<Integer, String> calculateWeekdays() {
         Map<Integer, String> weekdaysMap = new HashMap<>();
 

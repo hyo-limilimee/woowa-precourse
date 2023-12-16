@@ -24,9 +24,6 @@ public class Scheduler {
         holidayTurnList = inputHolidayTurns();
 
         MonthOfDay monthOfDay = new MonthOfDay(startingDay);
-
-        Map<Integer, String> weekdaysMap = monthOfDay.calculateWeekdays();
-
         monthOfDay.assignTurns(weekdayTurnList, holidayTurnList);
     }
 

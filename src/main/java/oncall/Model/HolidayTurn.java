@@ -8,12 +8,17 @@ import oncall.View.ErrorMessages;
 
 public class HolidayTurn {
 
+    private static final Integer MAX_COUNT = 35;
+    private static final Integer MIN_COUNT = 5;
+    private static final Integer MAX_NICKNAME_COUNT = 5;
+    private static final String COMMA = ",";
+
     public static List<String> parseTurnInput(String holidayTurnInput) {
         List<String> holidayTurnList = new ArrayList<>();
         Set<String> uniqueNicknames = new HashSet<>();
-        String[] holidayTurns = holidayTurnInput.split(",");
+        String[] holidayTurns = holidayTurnInput.split(COMMA);
 
-        if (holidayTurns.length < 5 || holidayTurns.length > 35) {
+        if (holidayTurns.length < MIN_COUNT || holidayTurns.length > MAX_COUNT) {
             ErrorMessages.nicknameCountError();
             throw new IllegalArgumentException();
         }
@@ -38,6 +43,6 @@ public class HolidayTurn {
     }
 
     public static boolean validateNickName(String nickname) {
-        return nickname.length() <= 5;
+        return nickname.length() <= MAX_NICKNAME_COUNT;
     }
 }

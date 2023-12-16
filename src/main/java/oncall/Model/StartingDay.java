@@ -3,7 +3,6 @@ package oncall.Model;
 import java.util.Map;
 
 public class StartingDay {
-
     private final int startMonth;
     private final String startWeekday;
 

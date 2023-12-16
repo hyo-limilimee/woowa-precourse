@@ -34,6 +34,9 @@ public class Scheduler {
 
         // calculateWeekdays 메소드 호출
         Map<Integer, String> weekdaysMap = monthOfDay.calculateWeekdays();
+
+        // Assign turns and print the result
+        monthOfDay.assignTurns(weekdayTurnList, holidayTurnList);
     }
 
     public StartingDay inputStartingDate() {
@@ -43,6 +46,7 @@ public class Scheduler {
             day = StartingDateParser.parseStartingDayInput(InputView.readStartDate());
             return day;
         } catch (IllegalArgumentException e) {
+            System.out.println("Invalid starting date. Please try again.");
             return inputStartingDate();
         }
     }
@@ -52,6 +56,7 @@ public class Scheduler {
             String weekdayTurnInput = InputView.readWeekdayTurn();
             return WeekDayTurn.parseTurnInput(weekdayTurnInput);
         } catch (IllegalArgumentException e) {
+            System.out.println("Invalid weekday turns. Please try again.");
             return inputWeekdayTurns();
         }
     }
@@ -61,7 +66,8 @@ public class Scheduler {
             String holidayTurnInput = InputView.readHolidayTurn();
             return WeekDayTurn.parseTurnInput(holidayTurnInput);
         } catch (IllegalArgumentException e) {
-            return inputWeekdayTurns();
+            System.out.println("Invalid holiday turns. Please try again.");
+            return inputHolidayTurns();
         }
     }
 }

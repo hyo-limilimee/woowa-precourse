@@ -56,27 +56,27 @@ public class MonthOfDay {
     }
 
     public void assignTurns(List<String> weekdayTurnList, List<String> holidayTurnList) {
-        int daysInMonth = calculateWeekdays().size();
+        Map<Integer, String> weekdaysMap = calculateWeekdays();
 
-        for (int i = 1; i <= daysInMonth; i++) {
+        for (int i = 1; i <= weekdaysMap.size(); i++) {
             String dateKey = startingDay.getStartMonth() + "월 " + i + "일";
-            String dayOfWeek = calculateWeekdays().get(i);
+            String dayOfWeek = weekdaysMap.get(i);
 
             String assignedPerson;
-            if (isWeekend(i)) {
+            if (isWeekend(dayOfWeek)) {
                 int holidayIndex = (i - 1) % holidayTurnList.size();
                 assignedPerson = holidayTurnList.get(holidayIndex);
+                System.out.printf("%s %s %s 휴일%n", dateKey, dayOfWeek, assignedPerson);
             } else {
                 int weekdayIndex = (i - 1) % weekdayTurnList.size();
                 assignedPerson = weekdayTurnList.get(weekdayIndex);
+                System.out.printf("%s %s %s%n", dateKey, dayOfWeek, assignedPerson);
             }
-
-            System.out.printf("%s %s %s%n", dateKey, dayOfWeek, assignedPerson);
         }
     }
 
-    private boolean isWeekend(int day) {
-        String dateKey = startingDay.getStartMonth() + "월 " + day + "일";
-        return weekendList.contains(dateKey);
+    private boolean isWeekend(String dayOfWeek) {
+        return dayOfWeek.equals("토") || dayOfWeek.equals("일");
     }
+
 }

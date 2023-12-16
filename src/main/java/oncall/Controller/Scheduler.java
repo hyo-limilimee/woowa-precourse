@@ -1,5 +1,6 @@
 package oncall.Controller;
 
+import oncall.Model.HolidayTurn;
 import oncall.Model.MonthOfDay;
 import oncall.Model.StartingDay;
 import oncall.Model.StartingDateParser;
@@ -22,13 +23,10 @@ public class Scheduler {
         weekdayTurnList = inputWeekdayTurns();
         holidayTurnList = inputHolidayTurns();
 
-        // MonthOfDay 생성
         MonthOfDay monthOfDay = new MonthOfDay(startingDay);
 
-        // calculateWeekdays 메소드 호출
         Map<Integer, String> weekdaysMap = monthOfDay.calculateWeekdays();
 
-        // Assign turns and print the result
         monthOfDay.assignTurns(weekdayTurnList, holidayTurnList);
     }
 
@@ -39,7 +37,7 @@ public class Scheduler {
             day = StartingDateParser.parseStartingDayInput(InputView.readStartDate());
             return day;
         } catch (IllegalArgumentException e) {
-            System.out.println("Invalid starting date. Please try again.");
+            System.out.println();
             return inputStartingDate();
         }
     }
@@ -49,7 +47,7 @@ public class Scheduler {
             String weekdayTurnInput = InputView.readWeekdayTurn();
             return WeekDayTurn.parseTurnInput(weekdayTurnInput);
         } catch (IllegalArgumentException e) {
-            System.out.println("Invalid weekday turns. Please try again.");
+            System.out.println();
             return inputWeekdayTurns();
         }
     }
@@ -57,9 +55,9 @@ public class Scheduler {
     public List<String> inputHolidayTurns() {
         try {
             String holidayTurnInput = InputView.readHolidayTurn();
-            return WeekDayTurn.parseTurnInput(holidayTurnInput);
+            return HolidayTurn.parseTurnInput(holidayTurnInput);
         } catch (IllegalArgumentException e) {
-            System.out.println("Invalid holiday turns. Please try again.");
+            System.out.println();
             return inputHolidayTurns();
         }
     }

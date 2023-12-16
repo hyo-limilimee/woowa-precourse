@@ -8,12 +8,18 @@ import oncall.View.ErrorMessages;
 
 public class WeekDayTurn {
 
+    private static final Integer MAX_COUTNT = 35;
+    private static final Integer MIN_COUTNT = 5;
+    private static final Integer MAX_NICKNAME_COUTNT = 5;
+    private static final String COMMA = ",";
+
+
     public static List<String> parseTurnInput(String weekdayTurnInput) {
         List<String> weekdayTurnList = new ArrayList<>();
         Set<String> uniqueNicknames = new HashSet<>();  // To check for duplicates
-        String[] weekdayTurns = weekdayTurnInput.split(",");
+        String[] weekdayTurns = weekdayTurnInput.split(COMMA);
 
-        if (weekdayTurns.length < 5 || weekdayTurns.length > 35) {
+        if (weekdayTurns.length < MIN_COUTNT || weekdayTurns.length > MAX_COUTNT) {
             ErrorMessages.nicknameCountError();
             throw new IllegalArgumentException();
         }
@@ -38,6 +44,6 @@ public class WeekDayTurn {
     }
 
     public static boolean validateNickName(String nickname) {
-        return nickname.length() <= 5;
+        return nickname.length() <= MAX_NICKNAME_COUTNT;
     }
 }

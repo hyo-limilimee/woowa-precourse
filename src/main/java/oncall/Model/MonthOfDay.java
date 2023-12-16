@@ -26,11 +26,21 @@ public class MonthOfDay {
             String dateKey = startingDay.getStartMonth() + "월 " + i + "일";
             String weekday = daysOfWeek[(i - 1) % 7];
 
-            if (weekday.equals("토") || weekday.equals("일")) {
+            if ((startingDay.getStartMonth() == 1 && i == 1) ||
+                    (startingDay.getStartMonth() == 3 && i == 1) ||
+                    (startingDay.getStartMonth() == 5 && i == 5) ||
+                    (startingDay.getStartMonth() == 6 && i == 6) ||
+                    (startingDay.getStartMonth() == 8 && i == 15) ||
+                    (startingDay.getStartMonth() == 10 && i == 3) ||
+                    (startingDay.getStartMonth() == 10 && i == 9) ||
+                    (startingDay.getStartMonth() == 12 && i == 25) ||
+                    weekday.equals("토") || weekday.equals("일")) {
                 weekendList.add(dateKey);
             }
+
         }
     }
+
 
     public Map<Integer, String> calculateWeekdays() {
         Map<Integer, String> weekdaysMap = new HashMap<>();
@@ -63,7 +73,9 @@ public class MonthOfDay {
             String dayOfWeek = weekdaysMap.get(i);
 
             String assignedPerson;
-            if (isWeekend(dayOfWeek)) {
+
+            if (weekendList.contains(dateKey)) {
+                // Check if the date is in the weekendList
                 int holidayIndex = (i - 1) % holidayTurnList.size();
                 assignedPerson = holidayTurnList.get(holidayIndex);
                 System.out.printf("%s %s %s 휴일%n", dateKey, dayOfWeek, assignedPerson);
